@@ -90,8 +90,7 @@ dotnet user-secrets set "MercadoPago:AccessToken" "TU_TOKEN"
 
 ##  Autores
 **Angel Santiago Camarena Gracia**
+
 **Martin Paulo Mendoza Escobar**
+
 **Ivan Emiliano Montes Garcia**
-- GitHub: [@el-commites](https://github.com/el-commites)
-- LinkedIn: [Tu enlace]
-- Correo: [Tu correo]

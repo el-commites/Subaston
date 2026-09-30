@@ -1,0 +1,387 @@
+@using Subaston.Models.Models
+@model List<ReportesSubastas>
+@{
+    ViewData["Title"] = "Reportes de Subastas";
+    var usuario = Context.Session.GetString("Usuario");
+    var rol = Context.Session.GetString("Rol");
+    var apodo = Context.Session.GetString("Apodo");
+}
+<link href="~/css/Admin/ReportesSubastas.css" rel="stylesheet" />
+<link href="~/css/Notificaciones.css" rel="stylesheet" />
+
+<div class="mi-navbar">
+    <img class="imagen-navbar" src="~/Imagenes3/LogoFinal2-transparente.png" />
+    <div class="nav-links">
+        <span class="nombre-usuario">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+            </svg>
+            Hola @apodo
+        </span>
+        <div class="notificaciones-wrapper">
+            <button id="btnNotificaciones" class="btn-notificaciones" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
+                </svg>
+                <span id="puntoNotificacion" class="punto-notificacion" style="display:none;"></span>
+            </button>
+            <div id="panelNotificaciones" class="panel-notificaciones" style="display:none;">
+                <div class="panel-notificaciones-header">
+                    <strong>Notificaciones</strong>
+                </div>
+                <div id="listaNotificaciones" class="lista-notificaciones"></div>
+            </div>
+        </div>
+        <a id="btn-logout" asp-area="Cuentas" asp-controller="Cuenta" asp-action="Logout">
+            Cerrar sesion
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+            </svg>
+        </a>
+    </div>
+</div>
+
+<div class="contenedor-principal">
+
+    <div class="lado-izquierdo">
+        <div class="usuario">
+            <div class="icono">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                </svg>
+            </div>
+            <div class="datos">
+                <h1>@rol</h1>
+                <p>@usuario</p>
+            </div>
+        </div>
+        <div class="contenedor-internoizquierda">
+            <div class="titulo-izq"><h1>Accesos Rápidos</h1></div>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="Index" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                </svg>
+                Inicio
+            </a>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="ProductosPendientes" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003zM10.404 2 4.25 4.461 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339L8 5.961 5.596 5l6.154-2.461z" />
+                </svg>
+                Productos por aprobar
+            </a>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="ReportesSubastas" class="btn-lateral activo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-receipt-cutoff" viewBox="0 0 16 16">
+                    <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5" />
+                    <path d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118z" />
+                </svg>
+                Reportes de Pujas
+            </a>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="Usuarios" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z" />
+                </svg>
+                Administrar Usuarios
+            </a>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="Estadisticas" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line" viewBox="0 0 16 16">
+                    <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1zm1 12h2V2h-2zm-3 0V7H7v7zm-5 0v-3H2v3z" />
+                </svg>
+                Estadísticas
+            </a>
+            <a id="btn-verificacion-card" asp-area="Cuentas" asp-controller="Cuenta" asp-action="Verificacion" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                    <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                </svg>
+                Cambia tu contraseña
+            </a>
+        </div>
+    </div>
+
+    <div class="lado-derecho">
+        <div class="bienvenida">
+            <h1 class="titulo-bienvenida">Reportes de Pujas / Subastas</h1>
+            <p class="subtitulo-bienvenida">Gestiona y revisa los reportes hechos por los usuarios a subastas activas o finalizadas</p>
+        </div>
+
+        <!-- FORMULARIO NOTIFICACIÓN PERSONALIZADA -->
+        <div class="form-notif">
+            <h3 class="form-notif-titulo">Enviar Notificación Personalizada</h3>
+            <form method="post" asp-action="EnviarNotificacionPersonalizada" id="formEnviarNotificacion">
+                <div class="form-notif-fila">
+                    <select name="destinatario" id="selectDestinatario" class="form-notif-input">
+                        <option value="usuario">Usuario específico</option>
+                        <option value="compradores">Todos los compradores</option>
+                        <option value="vendedores">Todos los vendedores</option>
+                        <option value="todos">Todos los usuarios</option>
+                    </select>
+                </div>
+                <div class="form-notif-fila" id="campoApodo">
+                    <input type="text" name="apodo" placeholder="Apodo del usuario" class="form-notif-input" />
+                </div>
+                <div class="form-notif-fila">
+                    <input type="text" name="titulo" placeholder="Título" class="form-notif-input" maxlength="80" />
+                </div>
+                <div class="form-notif-fila">
+                    <textarea name="mensaje" placeholder="Mensaje" class="form-notif-input" rows="2" maxlength="200"></textarea>
+                </div>
+                <button type="submit" class="form-notif-btn">Enviar</button>
+            </form>
+        </div>
+
+        @{
+            var pendientes = Model?.Where(x => x.Estado != "Revisado").ToList() ?? new List<ReportesSubastas>();
+            var revisados = Model?.Where(x => x.Estado == "Revisado").ToList() ?? new List<ReportesSubastas>();
+        }
+
+        <ul class="nav nav-tabs" id="reportesTabs" role="tablist" style="border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 20px; display:flex; align-items:center;">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="pendientes-tab" data-bs-toggle="tab" data-bs-target="#pendientes" type="button" role="tab" style="background: transparent; color: #00B8D9; border: none; font-weight: bold; padding: 10px 20px;">
+                    Pendientes (@pendientes.Count)
+                </button>
+            </li>
+            <li class="nav-item" role="presentation" style="display:flex; align-items:center; gap:10px;">
+                <button class="nav-link" id="revisados-tab" data-bs-toggle="tab" data-bs-target="#revisados" type="button" role="tab" style="background: transparent; color: rgba(255,255,255,0.5); border: none; padding: 10px 20px;">
+                    Revisados (@revisados.Count)
+                </button>
+                @if (revisados.Count > 0)
+                {
+                    <form method="post" asp-action="LimpiarReportesRevisados" style="margin:0;">
+                        <button type="submit" class="btn-limpiar">🗑 Limpiar</button>
+                    </form>
+                }
+            </li>
+        </ul>
+
+        <div class="tab-content" id="reportesTabsContent">
+
+            <!-- PESTAÑA PENDIENTES -->
+            <div class="tab-pane fade show active" id="pendientes" role="tabpanel">
+                <div class="tabla-wrapper">
+                    <table class="tabla-admin">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Reportero</th>
+                                <th>Producto Reportado</th>
+                                <th>Motivo</th>
+                                <th>Comentarios</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (pendientes.Count > 0)
+                            {
+                                @foreach (var r in pendientes)
+                                {
+                                    <tr>
+                                        <td>@r.FechaReporte.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td>
+                                            <div class="reportero-nombre">@r.Usuario?.Apodo</div>
+                                            <div class="reportero-apodo">@r.Usuario?.Nombre</div>
+                                        </td>
+                                        <td>
+                                            <div class="producto-cell">
+                                                @if (r.Producto != null)
+                                                {
+                                                    <a asp-action="DetallesProducto" asp-route-id="@r.Producto.IdProductos" style="display:flex; align-items:center; text-decoration:none; gap:10px;">
+                                                        @if (!string.IsNullOrEmpty(r.Producto.ImagenUrl))
+                                                        {
+                                                            <img src="@r.Producto.ImagenUrl" alt="img" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="producto-sin-img">Sin img</div>
+                                                        }
+                                                        <div class="producto-cell-info">
+                                                            <span class="producto-cell-nombre" style="color: #00B8D9; font-weight: bold;">@r.Producto.NombreDelProducto ↗</span>
+                                                            <span class="badge-estado-producto">@r.Producto.Estado</span>
+                                                        </div>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <span class="producto-eliminado">Producto Eliminado</span>
+                                                }
+                                            </div>
+                                        </td>
+                                        <td><span class="motivo-cell">@r.Motivo</span></td>
+                                        <td><div class="comentario-cell">@r.Comentario</div></td>
+                                        <td><span class="badge-pendiente">Pendiente</span></td>
+                                        <td>
+                                            <div class="acciones-cell">
+                                                @if (r.Producto != null)
+                                                {
+                                                    <form method="post" asp-action="EliminarSubasta" class="form-eliminar">
+                                                        <input type="hidden" name="id" value="@r.Producto.IdProductos" />
+                                                        <input type="hidden" name="regresar" value="ReportesSubastas" />
+                                                        <button type="submit" class="btn-eliminar-subasta">Eliminar Subasta</button>
+                                                    </form>
+                                                }
+                                                <a asp-action="MarcarReporteRevisado" asp-route-id="@r.IdReporte" class="btn-marcar-revisado">Marcar Revisado</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="sin-productos">No hay reportes pendientes.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- PESTAÑA REVISADOS -->
+            <div class="tab-pane fade" id="revisados" role="tabpanel">
+                <div class="tabla-wrapper">
+                    <table class="tabla-admin">
+                        <thead>
+                            <tr>
+                                <th>Fecha</th>
+                                <th>Reportero</th>
+                                <th>Producto Reportado</th>
+                                <th>Motivo</th>
+                                <th>Comentarios</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (revisados.Count > 0)
+                            {
+                                @foreach (var r in revisados)
+                                {
+                                    <tr>
+                                        <td>@r.FechaReporte.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td>
+                                            <div class="reportero-nombre">@r.Usuario?.Apodo</div>
+                                            <div class="reportero-apodo">@r.Usuario?.Nombre</div>
+                                        </td>
+                                        <td>
+                                            <div class="producto-cell">
+                                                @if (r.Producto != null)
+                                                {
+                                                    <a asp-action="DetallesProducto" asp-route-id="@r.Producto.IdProductos" style="display:flex; align-items:center; text-decoration:none; gap:10px;">
+                                                        @if (!string.IsNullOrEmpty(r.Producto.ImagenUrl))
+                                                        {
+                                                            <img src="@r.Producto.ImagenUrl" alt="img" />
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="producto-sin-img">Sin img</div>
+                                                        }
+                                                        <div class="producto-cell-info">
+                                                            <span class="producto-cell-nombre" style="color: #00B8D9; font-weight: bold;">@r.Producto.NombreDelProducto ↗</span>
+                                                            <span class="badge-estado-producto">@r.Producto.Estado</span>
+                                                        </div>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <span class="producto-eliminado">Producto Eliminado</span>
+                                                }
+                                            </div>
+                                        </td>
+                                        <td><span class="motivo-cell">@r.Motivo</span></td>
+                                        <td><div class="comentario-cell">@r.Comentario</div></td>
+                                        <td><span class="badge-revisado">Revisado</span></td>
+                                        <td>
+                                            <div class="acciones-cell">
+                                                @if (r.Producto != null)
+                                                {
+                                                    <form method="post" asp-action="EliminarSubasta" class="form-eliminar">
+                                                        <input type="hidden" name="id" value="@r.Producto.IdProductos" />
+                                                        <input type="hidden" name="regresar" value="ReportesSubastas" />
+                                                        <button type="submit" class="btn-eliminar-subasta">Eliminar Subasta</button>
+                                                    </form>
+                                                }
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="7" class="sin-productos">No hay reportes revisados.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <script>
+            // Tabs
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.querySelectorAll('.nav-link').forEach(b => {
+                        b.style.color = 'rgba(255,255,255,0.5)';
+                        b.style.fontWeight = 'normal';
+                    });
+                    this.style.color = '#00B8D9';
+                    this.style.fontWeight = 'bold';
+                });
+            });
+
+            // Mostrar/ocultar campo apodo
+            const sel = document.getElementById('selectDestinatario');
+            const campoApodo = document.getElementById('campoApodo');
+            sel.addEventListener('change', function () {
+                campoApodo.style.display = this.value === 'usuario' ? 'block' : 'none';
+            });
+        </script>
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/js/Vendedor/CerrarSesion.js"></script>
+<script src="~/js/Vendedor/MiPerfil.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="~/js/Notificacion.js"></script>
+<script src="~/js/Admin/ReportesSubastas.js"></script>
+@if (TempData["Correcto"] != null)
+{
+    <script>
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'success',
+            title: '@TempData["Correcto"]',
+            showConfirmButton: false,
+            timer: 2500,
+            timerProgressBar: true,
+            background: '#1a0933',
+            color: '#fff'
+        });
+    </script>
+}
+
+@if (TempData["Error"] != null)
+{
+    <script>
+        Swal.fire({
+            toast: true,
+            position: 'top-end',
+            icon: 'error',
+            title: '@TempData["Error"]',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            background: '#1a0933',
+            color: '#fff'
+        });
+    </script>
+}

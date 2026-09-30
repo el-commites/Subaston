@@ -1,0 +1,58 @@
+﻿@model Subaston.ViewsModels.VerificacionViewsModels
+@{
+    ViewData["Title"] = "Verificación";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/cuenta-css/Verificacion.css"/>
+</head>
+<body>
+
+    <div class="mi-navbar">
+        <img class="imagen-navbar" src="~/Imagenes3/LogoFinal2-transparente.png" />
+        <div class="nav-links">
+            <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Login">Inicio de Sesión</a>
+            <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Registrar">Registro</a>
+            <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="PoliticasPrivacidad">Políticas de Privacidad</a>
+            <a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+        </div>
+
+    </div>
+
+    <div class="layout">
+
+        <div class="lado-izquierdo">
+
+            <h1 class="texto-titulo">Recupera tu Acceso</h1>
+            <p class="slogan">Ingresa tu correo y te ayudamos.</p>
+            <p class="desc">Si olvidaste tu contraseña, ingresa el correo con el que te registraste y te enviaremos los pasos para recuperar tu cuenta.</p>
+
+        </div>
+
+        <div class="verify-container">
+            <h2>Verificar correo para cambio de contraseña</h2>
+
+            <form asp-action="Verificacion" method="post">
+                <label>Correo</label>
+                <input asp-for="Correo" placeholder="Ingresa tu correo" />
+                <span asp-validation-for="Correo" class="validation"></span>
+
+                <button type="submit" class="btn-verificar">Verificar</button>
+
+                <div style="display: flex; gap: 12px; margin-top: 14px; justify-content: center;">
+                    <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Login" class="btn-principal">Login</a>
+                    <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Registrar" class="btn-secundario">Registro</a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,402 @@
+/* ══════════════════════════════════════════
+   POLÍTICAS DE PRIVACIDAD — Subaston
+══════════════════════════════════════════ */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    color: white;
+    background-image: linear-gradient(#17082e 0, #1a0933 7%, #1a0933 80%, #0c1f4c 100%);
+    overflow-x: hidden;
+}
+
+/* ── NAVBAR ── */
+.mi-navbar {
+    background: rgba(23, 2, 41, 0.9);
+    padding: 8px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.imagen-navbar {
+    height: 2rem;
+    width: 6rem;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+    .nav-links a {
+        color: #d1d5db;
+        margin-left: 15px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+/* ── BOTONES ── */
+.btn-principal {
+    background: #00B8D9;
+    color: #000 !important;
+    padding: 6px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.75rem;
+}
+
+    .btn-principal:hover {
+        box-shadow: 0 0 12px #00B8D9;
+        color: #000;
+    }
+
+.btn-secundario {
+    background: transparent;
+    border: 1px solid #00B8D9;
+    color: #00B8D9 !important;
+    padding: 6px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 0.75rem;
+}
+
+    .btn-secundario:hover {
+        background: rgba(0, 184, 217, 0.1);
+    }
+
+/* ── HERO ── */
+.pp-hero {
+    text-align: center;
+    padding: 60px 48px 40px;
+    border-bottom: 1px solid rgba(0, 184, 217, 0.15);
+}
+
+.pp-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 184, 217, 0.1);
+    border: 1px solid rgba(0, 184, 217, 0.3);
+    color: #00B8D9;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.pp-hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #ffffff;
+    text-shadow: 0 0 8px #00B8D9;
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+
+.pp-hero-meta {
+    color: #00B8D9;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 14px;
+}
+
+.pp-hero-desc {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+/* ── LAYOUT PRINCIPAL ── */
+.pp-main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 48px;
+}
+
+.pp-contenido {
+    width: 100%;
+}
+
+/* ── SECCIONES ── */
+.pp-seccion {
+    margin-bottom: 10px;
+}
+
+.pp-seccion-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #00B8D9;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.pp-seccion h2 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.pp-seccion-sub {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.pp-divisor {
+    border: none;
+    border-top: 1px solid rgba(0, 184, 217, 0.12);
+    margin: 30px 0;
+}
+
+/* ── CARDS (Datos) ── */
+.pp-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+}
+
+.pp-card {
+    background: #111827;
+    border: 1px solid rgba(0, 184, 217, 0.2);
+    border-radius: 12px;
+    padding: 18px;
+    transition: box-shadow 0.2s;
+}
+
+    .pp-card:hover {
+        box-shadow: 0 0 16px rgba(0, 184, 217, 0.15);
+    }
+
+    .pp-card svg {
+        color: #00B8D9;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .pp-card h4 {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #ffffff;
+        margin-bottom: 6px;
+    }
+
+    .pp-card p {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.5);
+        line-height: 1.5;
+    }
+
+/* ── LISTA (Uso) ── */
+.pp-lista {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+    .pp-lista li {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+    }
+
+.pp-lista-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #00B8D9;
+    flex-shrink: 0;
+    margin-top: 5px;
+}
+
+.pp-lista strong {
+    color: #ffffff;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 2px;
+}
+
+.pp-lista p {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.83rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ── TERCEROS ── */
+.pp-terceros {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.pp-tercero {
+    background: #111827;
+    border: 1px solid rgba(0, 184, 217, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.pp-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #00B8D9;
+    background: rgba(0, 184, 217, 0.1);
+    border: 1px solid rgba(0, 184, 217, 0.25);
+    border-radius: 20px;
+    padding: 2px 10px;
+    margin-bottom: 8px;
+}
+
+.pp-tercero h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+
+.pp-tercero p {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.5;
+}
+
+.pp-nota {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 184, 217, 0.05);
+    border: 1px solid rgba(0, 184, 217, 0.2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 0.83rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+    .pp-nota svg {
+        color: #00B8D9;
+        flex-shrink: 0;
+    }
+
+/* ── SEGURIDAD ── */
+.pp-seguridad {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pp-seg-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #111827;
+    border: 1px solid rgba(0, 184, 217, 0.15);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.5;
+}
+
+    .pp-seg-item svg {
+        color: #00B8D9;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+/* ── CONTACTO ── */
+.pp-contacto {
+    display: flex;
+    gap: 16px;
+}
+
+.pp-contacto-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #111827;
+    border: 1px solid rgba(0, 184, 217, 0.2);
+    border-radius: 12px;
+    padding: 18px;
+    flex: 1;
+}
+
+    .pp-contacto-item svg {
+        color: #00B8D9;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+
+    .pp-contacto-item strong {
+        display: block;
+        color: #ffffff;
+        font-size: 0.9rem;
+        margin-bottom: 4px;
+    }
+
+    .pp-contacto-item p {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+        margin: 0;
+    }
+
+/* ── FOOTER ── */
+.pp-footer {
+    background: rgba(23, 2, 41, 0.9);
+    border-top: 1px solid rgba(0, 184, 217, 0.12);
+    padding: 18px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .pp-footer p {
+        color: rgba(255, 255, 255, 0.35);
+        font-size: 0.8rem;
+    }
+
+.pp-footer-links {
+    display: flex;
+    gap: 16px;
+}
+
+    .pp-footer-links a {
+        color: rgba(255, 255, 255, 0.35);
+        text-decoration: none;
+        font-size: 0.8rem;
+        transition: color 0.2s;
+    }
+
+        .pp-footer-links a:hover {
+            color: #00B8D9;
+        }

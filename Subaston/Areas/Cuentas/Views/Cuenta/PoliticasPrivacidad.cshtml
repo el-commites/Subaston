@@ -1,0 +1,170 @@
+@{
+    ViewData["Title"] = "Políticas de Privacidad";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Subaston</title>
+    <link href="~/css/cuenta-css/PoliticasPrivacidad.css" rel="stylesheet" />
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="mi-navbar">
+        <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Login">
+            <img src="~/Imagenes3/LogoFinal2-transparente.png" alt="Subaston" class="imagen-navbar" />
+        </a>
+        <div class="nav-links">
+            <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Login" class="btn-secundario">Iniciar sesión</a>
+            <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Registrar" class="btn-principal">Registrarse</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <header class="pp-hero">
+        <div class="pp-hero-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 0c-.69 0-1.843.265-2.928.56-1.11.3-2.229.655-2.887.87a1.54 1.54 0 0 0-1.044 1.262c-.596 4.477.787 7.795 2.465 9.99a11.8 11.8 0 0 0 2.517 2.453c.386.273.744.482 1.048.625.28.132.581.24.829.24s.548-.108.829-.24a7 7 0 0 0 1.048-.625 11.8 11.8 0 0 0 2.517-2.453c1.678-2.195 3.061-5.513 2.465-9.99a1.54 1.54 0 0 0-1.044-1.263 62.5 62.5 0 0 0-2.887-.87C9.843.266 8.69 0 8 0m0 5a1.5 1.5 0 0 1 .5 2.915l.385 1.99a.5.5 0 0 1-.491.595h-.788a.5.5 0 0 1-.49-.595l.384-1.99A1.5 1.5 0 0 1 8 5" />
+            </svg>
+            Privacidad
+        </div>
+        <h1>Políticas de Privacidad</h1>
+        <p class="pp-hero-meta">Última actualización: enero 2025 · Subaston S.A. de C.V.</p>
+        <p class="pp-hero-desc">
+            Aquí explicamos qué información recopilamos cuando usas Subaston,
+            cómo la utilizamos y qué controles tienes sobre ella.
+            Al registrarte o continuar usando la plataforma aceptas estas condiciones.
+        </p>
+    </header>
+
+    <!-- MAIN -->
+    <main class="pp-main">
+
+        <div class="pp-contenido">
+
+            <!-- 01 -->
+            <section class="pp-seccion" id="datos">
+                <div class="pp-seccion-label">01</div>
+                <h2>Datos que recopilamos</h2>
+                <p class="pp-seccion-sub">Información que obtenemos directamente de ti o de tu actividad en la plataforma.</p>
+                <div class="pp-cards">
+                    <div class="pp-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2zm4.5 0a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1zM8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6m5 2.755C12.146 12.825 10.171 12 8 12s-4.146.826-5 1.755V14a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1z" />
+                        </svg>
+                        <h4>Datos de cuenta</h4>
+                        <p>Nombre, apodo, correo electrónico, contraseña cifrada y foto de perfil que proporcionas al registrarte.</p>
+                    </div>
+                    <div class="pp-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003z" />
+                        </svg>
+                        <h4>Datos de productos</h4>
+                        <p>Nombre, descripción, precio base, categoría, fecha de cierre e imágenes de los productos que publicas.</p>
+                    </div>
+                    <div class="pp-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5" />
+                        </svg>
+                        <h4>Actividad de subastas</h4>
+                        <p>Historial de pujas, montos, fechas de cierre, compradores ganadores y estados de pago.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="pp-divisor"></div>
+
+            <!-- 02 -->
+            <section class="pp-seccion" id="uso">
+                <div class="pp-seccion-label">02</div>
+                <h2>Cómo usamos tu información</h2>
+                <p class="pp-seccion-sub">Usamos tus datos únicamente para los fines descritos a continuación.</p>
+                <ul class="pp-lista">
+                    <li>
+                        <span class="pp-lista-dot"></span>
+                        <div><strong>Operar la plataforma</strong><p>Gestionar tu cuenta, mostrar tus productos en subastas activas y procesar las pujas de compradores.</p></div>
+                    </li>
+                    <li>
+                        <span class="pp-lista-dot"></span>
+                        <div><strong>Calcular y mostrar ganancias</strong><p>Generar el historial de ganancias con desglose de comisiones de Subaston y Mercado Pago.</p></div>
+                    </li>
+                    <li>
+                        <span class="pp-lista-dot"></span>
+                        <div><strong>Comunicaciones importantes</strong><p>Notificarte sobre el estado de tus productos (aprobado, rechazado, finalizado) y pagos recibidos.</p></div>
+                    </li>
+                    <li>
+                        <span class="pp-lista-dot"></span>
+                        <div><strong>Seguridad y prevención de fraude</strong><p>Detectar actividad sospechosa, publicaciones falsas o incumplimientos de las reglas de la plataforma.</p></div>
+                    </li>
+                </ul>
+            </section>
+
+            <div class="pp-divisor"></div>
+
+            <!-- 03 -->
+            <section class="pp-seccion" id="terceros">
+                <div class="pp-seccion-label">03</div>
+                <h2>Compartir con terceros</h2>
+                <p class="pp-seccion-sub">No vendemos tu información. Solo la compartimos cuando es estrictamente necesario para operar.</p>
+                <div class="pp-terceros">
+                    <div class="pp-tercero">
+                        <span class="pp-badge">Pago</span>
+                        <h4>Mercado Pago</h4>
+                        <p>Procesamos los pagos de compradores a través de Mercado Pago. Compartimos solo la información mínima necesaria para completar cada transacción.</p>
+                    </div>
+                    <div class="pp-tercero">
+                        <span class="pp-badge">Infraestructura</span>
+                        <h4>Supabase</h4>
+                        <p>Almacenamos tu información e imágenes de productos en Supabase, con cifrado en tránsito y en reposo.</p>
+                    </div>
+                </div>
+                <div class="pp-nota">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
+                    </svg>
+                    Nunca vendemos tu información personal a anunciantes ni a terceros con fines comerciales.
+                </div>
+            </section>
+
+            <div class="pp-divisor"></div>
+
+            <!-- 04 -->
+            <section class="pp-seccion" id="seguridad">
+                <div class="pp-seccion-label">04</div>
+                <h2>Almacenamiento y seguridad</h2>
+                <p class="pp-seccion-sub">Medidas que tomamos para proteger tus datos en todo momento.</p>
+                <div class="pp-seguridad">
+                    <div class="pp-seg-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2m3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2" />
+                        </svg>
+                        <span>Las contraseñas se almacenan cifradas. Subaston nunca puede ver tu contraseña en texto plano.</span>
+                    </div>
+                    <div class="pp-seg-item">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8.515 1.019A7 7 0 0 0 8 1V0a8 8 0 0 1 .589.022zm2.004.45a7 7 0 0 0-.985-.299l.219-.976q.576.129 1.126.342zm1.37.71a7 7 0 0 0-.439-.27l.493-.87a8 8 0 0 1 .979.654l-.615.789a7 7 0 0 0-.418-.302zm1.834 1.79a7 7 0 0 0-.653-.796l.724-.69q.406.429.747.91zm.744 1.352a7 7 0 0 0-.214-.468l.893-.45a8 8 0 0 1 .45 1.088l-.95.313a7 7 0 0 0-.179-.483m.53 2.507a7 7 0 0 0-.1-1.025l.985-.17q.1.58.116 1.17zm-.131 1.538q.05-.254.081-.51l.993.123a8 8 0 0 1-.23 1.155l-.964-.267q.069-.247.12-.501m-.952 2.379q.275-.436.486-.908l.914.405q-.24.54-.555 1.038zm-.964 1.205q.183-.183.35-.378l.758.653a8 8 0 0 1-.401.432zM8 1a7 7 0 1 0 4.95 11.95l.707.707A8.001 8.001 0 1 1 8 0zM7.5 3a.5.5 0 0 1 .5.5v5.21l3.248 1.856a.5.5 0 0 1-.496.868l-3.5-2A.5.5 0 0 1 7 9V3.5a.5.5 0 0 1 .5-.5" />
+                        </svg>
+                        <span>Tu información se conserva mientras tu cuenta esté activa. Al solicitar eliminación, tus datos se borran en máximo 30 días.</span>
+                    </div>
+                </div>
+            </section>
+
+            <div class="pp-divisor"></div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="pp-footer">
+        <p>© 2025 Subaston S.A. de C.V. · Todos los derechos reservados</p>
+        <div class="pp-footer-links">
+            <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Login">Iniciar sesión</a>
+            <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Registrar">Registrarse</a>
+        </div>
+    </footer>
+
+</body>
+</html>

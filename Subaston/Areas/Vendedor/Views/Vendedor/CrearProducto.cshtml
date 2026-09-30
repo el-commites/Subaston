@@ -1,0 +1,383 @@
+﻿@model Subaston.ViewsModels.CrearProductoViewModel
+@{
+    ViewData["Title"] = "Crear Producto";
+    var usuario = Context.Session.GetString("Usuario");
+    var rol = Context.Session.GetString("Rol");
+    var apodo = Context.Session.GetString("Apodo");
+    var fotoPerfil = Context.Session.GetString("FotoPerfil");
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/Vendedor/CrearProducto.css" rel="stylesheet" />
+<link href="~/css/Notificaciones.css" rel="stylesheet" />
+
+<div class="mi-navbar">
+    <img class="imagen-navbar" src="~/Imagenes3/LogoFinal2-transparente.png" />
+    <div class="nav-links">
+        <span class="nombre-usuario">
+            @if (!string.IsNullOrEmpty(fotoPerfil))
+            {
+                <img src="@fotoPerfil" style="width:24px; height:24px; border-radius:50%; object-fit:cover; margin-right:6px;" />
+            }
+            Hola @apodo
+        </span>
+        <div class="notificaciones-wrapper">
+            <button id="btnNotificaciones" class="btn-notificaciones" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
+                </svg>
+                <span id="puntoNotificacion" class="punto-notificacion" style="display:none;"></span>
+            </button>
+            <div id="panelNotificaciones" class="panel-notificaciones" style="display:none;">
+                <div class="panel-notificaciones-header">
+                    <strong>Notificaciones</strong>
+                </div>
+                <div id="listaNotificaciones" class="lista-notificaciones"></div>
+            </div>
+        </div>
+        <a id="btn-logout" asp-area="Cuentas" asp-controller="Cuenta" asp-action="Logout">
+            Cerrar sesiÃ³n
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+            </svg>
+        </a>
+    </div>
+</div>
+
+<div class="contenedor-principal">
+
+    <div class="lado-izquierdo">
+        <div class="usuario">
+            <div class="icono">
+                @if (!string.IsNullOrEmpty(fotoPerfil))
+                {
+                    <img src="@fotoPerfil" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid #00B8D9;" />
+                }
+                else
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                    </svg>
+                }
+            </div>
+            <div class="datos">
+                <h1>@rol</h1>
+                <p>@usuario</p>
+            </div>
+        </div>
+
+        <div class="contenedor-internoizquierda">
+            <div class="titulo-izq">
+                <h1>Accesos RÃ¡pidos</h1>
+            </div>
+            <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="Index" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                </svg>
+                Inicio
+            </a>
+            <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="MisProductos" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003zM10.404 2 4.25 4.461 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339L8 5.961 5.596 5l6.154-2.461z" />
+                </svg>
+                Mis Productos
+            </a>
+            <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="CrearProducto" class="btn-lateral activo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+                </svg>
+                Crear Producto
+            </a>
+            <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="HistorialGanancias" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8m5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0" />
+                    <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V9.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195z" />
+                    <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083q.088-.517.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1z" />
+                    <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 6 6 0 0 1 3.13-1.567" />
+                </svg>
+                Historial de Ganancias
+            </a>
+            <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="MiPerfil" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                </svg>
+                Mi Perfil
+            </a>
+            <a id="btn-verificacion" asp-area="Cuentas" asp-controller="Cuenta" asp-action="Verificacion" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                    <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                </svg>
+                Cambia tu contraseÃ±a
+            </a>
+        </div>
+    </div>
+
+    <div class="lado-centro">
+        <div class="bienvenida">
+            <h1 class="titulo-bienvenida">Ingresa los Datos de tu Producto</h1>
+        </div>
+
+        <div class="card-form">
+            <form asp-action="CrearProducto" method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="validacion"></div>
+                <div class="campo">
+                    <label>Nombre del producto</label>
+                    <input asp-for="NombreDelProducto" placeholder="Ejemplo: iPhone 15" />
+                    <span asp-validation-for="NombreDelProducto" class="validacion"></span>
+                </div>
+                <div class="campo">
+                    <label>Descripción</label>
+                    <textarea asp-for="Descripcion" rows="2" placeholder="Describe tu producto"></textarea>
+                    <span asp-validation-for="Descripcion" class="validacion"></span>
+                </div>
+                <div class="fila-dos">
+                    <div class="campo">
+                        <label>Precio inicial</label>
+                        <input asp-for="PrecioInicial" placeholder="$0.00" />
+                        <span asp-validation-for="PrecioInicial" class="validacion"></span>
+                    </div>
+                    <div class="campo">
+                        <label>Fecha y hora de cierre</label>
+                        <input asp-for="FechaCierre" type="datetime-local" id="input-fecha-cierre" onclick="this.showPicker()" />
+                        <span asp-validation-for="FechaCierre" class="validacion"></span>
+                        <small style="color:rgba(0,184,217,0.7); font-size:11px; margin-top:4px; display:block;">
+                            ⏱ Mínimo 20 minutos a partir de ahora
+                        </small>
+                    </div>
+                </div>
+                <div class="campo">
+                    <label>Categoría</label>
+                    <select asp-for="Categoria">
+                        <option value="">Selecciona una categoría</option>
+                        <option value="Consolas">Consolas</option>
+                        <option value="Juegos">Juegos</option>
+                        <option value="Cartas">Cartas</option>
+                        <option value="Figuras">Figuras</option>
+                        <option value="Arte">Arte</option>
+                        <option value="Musica">Musica</option>
+                        <option value="Ropa y Cosplay">Ropa y Cosplay</option>
+                        <option value="Tecnologia">Tecnologia</option>
+                    </select>
+                    <span asp-validation-for="Categoria" class="validacion"></span>
+                </div>
+                <div class="campo">
+                    <label>Imagen del producto</label>
+                    <div class="file-wrapper">
+                        <input asp-for="Imagen" type="file" id="input-imagen" style="display:none;" accept="image/*" />
+                        <button type="button" class="btn-file" onclick="document.getElementById('input-imagen').click()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-card-image" viewBox="0 0 16 16">
+                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+                                <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z" />
+                            </svg>
+                            Seleccionar imagen
+                        </button>
+                        <span id="nombre-archivo" style="color:rgba(255,255,255,0.4); font-size:12px; margin-left:10px;">Ningún archivo seleccionado</span>
+                    </div>
+                    <span asp-validation-for="Imagen" class="validacion"></span>
+                </div>
+                <input type="hidden" name="TimezoneOffset" id="timezone-offset" />
+                <button type="submit" class="btn-publicar">Ponlo en subasta</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="lado-derecho">
+
+        <div class="guia-card">
+            <div class="cat-header">
+                <span class="cat-titulo">¿Cómo publicar correctamente?</span>
+                <div class="cat-linea"></div>
+            </div>
+            <div class="guia-scroll">
+                <div class="card mb-3">
+                    <h3 class="card-header">Pasos a realizar para publicar</h3>
+                    <div class="card-body">
+                        <h5 class="card-title">1. Nombre claro</h5>
+                    </div>
+                    <img src="~/imagenes4/1.jpg" class="d-block w-100" alt="paso 1" style="height:300px; object-fit:cover;" />
+                    <div class="card-body">
+                        <p class="card-text">Usa un nombre específico. Evita nombres genéricos como objeto bonito.</p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <h3 class="card-header">Pasos a realizar para publicar</h3>
+                    <div class="card-body">
+                        <h5 class="card-title">2. Buena descripcion</h5>
+                    </div>
+                    <img src="~/imagenes4/2.jpg" class="d-block w-100" alt="paso 2" style="height:300px; object-fit:cover;" />
+                    <div class="card-body">
+                        <p class="card-text">Incluye de nuevo el Nombre del producto, el estado del producto, año, marca y cualquier detalle relevante para que a el comprador tenga interés y este seguro de participar.</p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <h3 class="card-header">Pasos a realizar para publicar</h3>
+                    <div class="card-body">
+                        <h5 class="card-title">3. Precio justo</h5>
+                    </div>
+                    <img src="~/imagenes4/3.jpg" class="d-block w-100" alt="paso 3" style="height:300px; object-fit:cover;" />
+                    <div class="card-body">
+                        <p style="text-align:justify;" class="card-text">El precio inicial debe ser razonable, un precio muy alto puede desalentar las pujas. Además el precio inicial es a lo que estás dispuesto de vender el producto en un inicio, ya que este precio con las pujas puede incrementarse bastante y por ende recibiras más.</p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <h3 class="card-header">Pasos a realizar para publicar</h3>
+                    <div class="card-body">
+                        <h5 class="card-title">4. Fecha de cierre</h5>
+                    </div>
+                    <img src="~/imagenes4/4.jpg" class="d-block w-100" alt="paso 4" style="height:300px; object-fit:cover;" />
+                    <div class="card-body">
+                        <p class="card-text">Elige una fecha que le de tiempo suficiente a los compradores para participar. Se recomienda minimo 3 dias delante del día actual que haces la puja.</p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <h3 class="card-header">Pasos a realizar para publicar</h3>
+                    <div class="card-body">
+                        <h5 class="card-title">5. Selecciona una Categoria</h5>
+                    </div>
+                    <img src="~/imagenes4/5.jpg" class="d-block w-100" alt="paso 5" style="height:300px; object-fit:cover;" />
+                    <div class="card-body">
+                        <p class="card-text">Selecciona la categoria que mejor encaje con tu producto. Dale click para ver mas informacion sobre las <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="GuiaCategorias" class="card-link">Categorías</a>. Y que tu producto entre en la categoría correcta.</p>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <h3 class="card-header">Pasos a realizar para publicar</h3>
+                    <div class="card-body">
+                        <h5 class="card-title">6. Imagen de calidad</h5>
+                    </div>
+                    <img src="~/imagenes4/6.jpg" class="d-block w-100" alt="paso 6" style="height:300px; object-fit:cover;" />
+                    <div class="card-body">
+                        <p class="card-text">Solo se puede suibir una foto , así que sube una foto clara y bien iluminada. Sí estas seguro de que todo está bien y cumples con todo, entonces dale click en publicar para mandar tu producto a revisión, un administrador revisará tu publicación y si cumple con las reglas será aceptado y te llegará un aviso. También te pueden rechazar el producto por otras razones, pica el <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="RazonesBaneo" class="card-link">enlace</a> para ver las demás razones.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="reglas-card">
+            <div class="cat-header">
+                <span class="cat-titulo">Reglas</span>
+                <div class="cat-linea"></div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">1. El producto debe ser tuyo</h5>
+                </div>
+                <img src="~/imagenes4/R1.jpg" class="d-block w-100" alt="regla 1" style="height:150px; object-fit:cover;" />
+                <div class="card-body">
+                    <p class="card-text">Al momento de publicar debes tener el producto en tu posesion. Una vez aprobado, deberas llevarlo a una sucursal de Subaston para su resguardo y entrega.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">2. Solo productos fisicos</h5>
+                </div>
+                <img src="~/imagenes4/R2.jpg" class="d-block w-100" alt="regla 2" style="height:150px; object-fit:cover;" />
+                <div class="card-body">
+                    <p class="card-text">
+                        Al momento de publicar debes tener el producto en tu posesion. Una vez aprobado, deberas llevarlo a una sucursal de Subaston para su resguardo y entrega.
+                        Consulta las direcciones y horarios en el siguiente
+                        <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="Sucursales" class="card-link">enlace</a>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">3. Tu decides el precio</h5>
+                </div>
+                <img src="~/imagenes4/R3.jpg" class="d-block w-100" alt="regla 3" style="height:150px; object-fit:cover;" />
+                <div class="card-body">
+                    <p class="card-text">No existe un precio minimo obligatorio. Al ser una plataforma de segunda mano, se promueven precios justos, así que no te excedas con el precio.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">4. Entrega en sucursal</h5>
+                </div>
+                <img src="~/imagenes4/R4.jpg" class="d-block w-100" alt="regla 4" style="height:150px; object-fit:cover;" />
+                <div class="card-body">
+                    <p class="card-text">La entrega del producto al comprador ganador se realizara a traves de una sucursal Subaston. El comprador pasara a recogerlo directamente ahi y no debes preocuparte a partir de la entrega en sucursal.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">5. No publiques duplicados</h5>
+                </div>
+                <img src="~/imagenes4/R5.jpg" class="d-block w-100" alt="regla 5" style="height:150px; object-fit:cover;" />
+                <div class="card-body">
+                    <p class="card-text">No esta permitido publicar el mismo producto mas de una vez. Puedes enviarlo a revision cuantas veces quieras, pero un administrador lo detectara de inmediato.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">6. Foto original del producto</h5>
+                </div>
+                <img src="~/imagenes4/R6.jpg" class="d-block w-100" alt="regla 6" style="height:150px; object-fit:cover;" />
+                <div class="card-body">
+                    <p class="card-text">La imagen debe ser una fotografia real y original del producto que estas vendiendo. No se permiten imagenes de internet ni de otros vendedores. Solo se acepta una foto.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">7. Todas las categorias son validas</h5>
+                </div>
+                <img src="~/imagenes4/R7.jpg" class="d-block w-100" alt="regla 7" style="height:150px; object-fit:cover;" />
+                <div class="card-body">
+                    <p class="card-text">Ninguna categoria esta prohibida siempre que el producto sea legal, fisico y de segunda mano. Elige la categoria que mejor describa lo que vendes.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">8. Minimo 3 dias de subasta</h5>
+                </div>
+                <img src="~/imagenes4/R8.jpg" class="d-block w-100" alt="regla 8" style="height:150px; object-fit:cover;" />
+                <div class="card-body">
+                    <p class="card-text">La fecha de cierre debe ser al menos 3 dias despues de la fecha actual. Esto garantiza que los compradores tengan tiempo suficiente para pujar.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">9. El precio no se puede modificar</h5>
+                </div>
+                <img src="~/imagenes4/R9.jpg" class="d-block w-100" alt="regla 9" style="height:150px; object-fit:cover;" />
+                <div class="card-body">
+                    <p class="card-text">Una vez que tu producto este publicado y aprobado, el precio inicial ya no podra ser modificado. Asegurate de definirlo bien antes de publicar.</p>
+                </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">10. La subasta no se puede cancelar</h5>
+                </div>
+                <img src="~/imagenes4/R10.jpg" class="d-block w-100" alt="regla 10" style="height:150px; object-fit:cover;" />
+                <div class="card-body">
+                    <p class="card-text">Una vez que la subasta recibe su primera puja, no es posible cancelarla. Asegurate de estar listo antes de publicar tu producto.</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@if (TempData["Correcto"] != null)
+{
+    <script>window.productoCreado = true;</script>
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/js/Vendedor/CrearProducto.js"></script>
+<script src="~/js/Vendedor/MiPerfil.js"></script>
+<script src="~/js/Vendedor/CerrarSesion.js"></script>
+<script src="~/js/Notificacion.js"></script>

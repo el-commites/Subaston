@@ -1,0 +1,104 @@
+﻿.notificaciones-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-notificaciones {
+    position: relative;
+    border: none;
+    background: transparent;
+    color: #d1d5db;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+}
+
+    .btn-notificaciones:hover {
+        color: #ffffff;
+    }
+
+.punto-notificacion {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 10px;
+    height: 10px;
+    background: #ff3b3b;
+    border-radius: 50%;
+    border: 2px solid #17082e;
+}
+
+.panel-notificaciones {
+    position: absolute;
+    right: 0;
+    top: 36px;
+    width: 330px;
+    max-height: 390px;
+    background: #17082e;
+    border: 1px solid rgba(0,184,217,0.35);
+    border-radius: 12px;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.35);
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.panel-notificaciones-header {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(0,184,217,0.25);
+    color: #00B8D9;
+    font-size: 14px;
+}
+
+.lista-notificaciones {
+    max-height: 335px;
+    overflow-y: auto;
+}
+
+    .lista-notificaciones::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .lista-notificaciones::-webkit-scrollbar-track {
+        background: #0f0f0f;
+    }
+
+    .lista-notificaciones::-webkit-scrollbar-thumb {
+        background: #00B8D9;
+        border-radius: 4px;
+    }
+
+.item-notificacion {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+}
+
+    .item-notificacion.no-leida {
+        background: rgba(0,184,217,0.12);
+    }
+
+    .item-notificacion a {
+        color: inherit;
+        text-decoration: none;
+        display: block;
+    }
+
+    .item-notificacion strong {
+        color: white;
+        font-size: 13px;
+    }
+
+    .item-notificacion span {
+        display: block;
+        margin-top: 3px;
+        line-height: 1.3;
+    }
+
+    .item-notificacion small {
+        display: block;
+        margin-top: 5px;
+        color: rgba(255,255,255,0.4);
+        font-size: 11px;
+    }

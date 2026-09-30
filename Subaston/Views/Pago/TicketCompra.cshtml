@@ -1,0 +1,258 @@
+@model Subaston.ViewsModels.TicketViewModel
+@{
+    ViewData["Title"] = Model.PaymentId == "Reimpresión" ? "Ticket de Compra - Subaston" : "¡Compra Exitosa!";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ticket de Compra - Subaston</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="~/css/TicketCompra.css" rel="stylesheet" />
+</head>
+<body>+
+
+    <!-- FONDO ANIMADO -->
+    <div class="bg-orbs">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+    </div>
+
+    <!-- CONFETTI -->
+    <div class="confetti-wrapper" id="confettiWrapper"></div>
+
+    <div class="page-shell">
+
+        <!-- ENCABEZADO DE ÉXITO -->
+        <div class="success-header" id="successHeader">
+            <div class="check-ring">
+                <svg viewBox="0 0 52 52" class="check-svg">
+                    <circle class="check-circle" cx="26" cy="26" r="25" fill="none" />
+                    <path class="check-tick" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                </svg>
+            </div>
+            @if (Model.PaymentId == "Reimpresión")
+            {
+                <h1 class="success-title">Ticket de Compra</h1>
+                <p class="success-sub">Comprobante oficial de tu adquisición en Subaston 📄</p>
+            }
+            else
+            {
+                <h1 class="success-title">¡Pago Exitoso!</h1>
+                <p class="success-sub">Gracias por tu compra en Subaston 🎉</p>
+            }
+        </div>
+
+        <!-- TICKET PRINCIPAL -->
+        <div class="ticket" id="ticket">
+
+            <!-- PERFORACIÓN SUPERIOR -->
+            <div class="ticket-perf top"></div>
+
+            <!-- CABECERA DEL TICKET -->
+            <div class="ticket-header">
+                <img src="~/Imagenes3/LogoFinal2-transparente.png" alt="Subaston" class="ticket-logo" onerror="this.style.display='none'" />
+                <div class="ticket-brand">
+                    <span class="brand-name">SUBASTON</span>
+                    <span class="brand-sub">Comprobante de Compra</span>
+                </div>
+                <div class="ticket-folio">
+                    <span class="folio-label">FOLIO</span>
+                    <span class="folio-num">#@Model.IdProducto-@DateTime.Now.ToString("yyyyMMdd")</span>
+                </div>
+            </div>
+
+            <!-- PRODUCTO -->
+            <div class="ticket-producto">
+                @if (!string.IsNullOrEmpty(Model.ImagenUrl))
+                {
+                    <div class="prod-img-wrap">
+                        <img src="@Model.ImagenUrl" alt="@Model.NombreProducto" class="prod-img" />
+                        <div class="prod-img-shine"></div>
+                    </div>
+                }
+                <div class="prod-info">
+                    <span class="prod-categoria">@Model.Categoria</span>
+                    <h2 class="prod-nombre">@Model.NombreProducto</h2>
+                    <div class="prod-monto">
+                        <span class="monto-label">Monto pagado</span>
+                        <span class="monto-valor">$@Model.MontoPagado.ToString("N2") <small>MXN</small></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DETALLES -->
+            <div class="ticket-detalles">
+                <div class="detalle-row">
+                    <span class="det-label">
+                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4" /></svg>
+                        Comprador
+                    </span>
+                    <span class="det-valor">@Model.ApodoComprador (@Model.NombreComprador)</span>
+                </div>
+                <div class="detalle-row">
+                    <span class="det-label">
+                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z" /></svg>
+                        Correo
+                    </span>
+                    <span class="det-valor">@Model.CorreoComprador</span>
+                </div>
+                <div class="detalle-row">
+                    <span class="det-label">
+                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z" /><path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" /></svg>
+                        Fecha de pago
+                    </span>
+                    <span class="det-valor">@Model.FechaPago.ToString("dd/MM/yyyy HH:mm")</span>
+                </div>
+                <div class="detalle-row">
+                    <span class="det-label">
+                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0zm0 3h16v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm3 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1z" /></svg>
+                        ID de Pago
+                    </span>
+                    <span class="det-valor folio-chip">@Model.PaymentId</span>
+                </div>
+            </div>
+
+            <!-- SEPARADOR PERFORADO -->
+            <div class="ticket-perf mid"></div>
+
+            <!-- SUCURSAL -->
+            <div class="ticket-sucursal">
+                <div class="sucursal-header">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                    </svg>
+                    <span>Recoge en la sucursal más cercana</span>
+                </div>
+
+                <div class="sucursal-card">
+                    <div class="sucursal-badge">SUCURSAL</div>
+                    <h3 class="sucursal-nombre">@Model.SucursalCercana.Nombre</h3>
+
+                    <div class="sucursal-rows">
+                        <div class="suc-row">
+                            <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                            </svg>
+                            @Model.SucursalCercana.Direccion
+                        </div>
+                        <div class="suc-row">
+                            <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1z" />
+                                <path d="M8 4.5a.5.5 0 0 0-1 0v3H4.5a.5.5 0 0 0 0 1H7v3a.5.5 0 0 0 1 0v-3h2.5a.5.5 0 0 0 0-1H8z" />
+                            </svg>
+                            @Model.SucursalCercana.Ciudad
+                        </div>
+                        <div class="suc-row">
+                            <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.6 17.6 0 0 0 4.168 6.608 17.6 17.6 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.68.68 0 0 0-.58-.122l-2.19.547a1.75 1.75 0 0 1-1.657-.459L5.482 8.062a1.75 1.75 0 0 1-.46-1.657l.548-2.19a.68.68 0 0 0-.122-.58z" />
+                            </svg>
+                            @Model.SucursalCercana.Telefono
+                        </div>
+                        <div class="suc-row">
+                            <svg width="13" height="13" fill="currentColor" viewBox="0 0 16 16">
+                                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+                                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
+                            </svg>
+                            @Model.SucursalCercana.Horario
+                        </div>
+                    </div>
+
+                    <a href="@Model.SucursalCercana.MapUrl" target="_blank" class="btn-mapa">
+                        <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                        </svg>
+                        Ver en Google Maps
+                    </a>
+                </div>
+
+                <div class="aviso-sucursal">
+                    <svg width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2" />
+                    </svg>
+                    Presenta este ticket en la sucursal para recoger tu producto. Trae una identificación oficial.
+                </div>
+            </div>
+
+            <!-- PERFORACIÓN INFERIOR -->
+            <div class="ticket-perf bot"></div>
+
+            <!-- PIE DEL TICKET -->
+            <div class="ticket-footer">
+                <div class="footer-barcode">
+                    @{
+                        var barcode = $"SUB-{Model.IdProducto:D6}-{Model.FechaPago:yyyyMMdd}";
+                    }
+                    <div class="barcode-lines">
+                        @for (int i = 0; i < 32; i++)
+                        {
+                            <div class="bline bline-@(i % 4)"></div>
+                        }
+                    </div>
+                    <span class="barcode-text">@barcode</span>
+                </div>
+                <p class="footer-gracias">¡Gracias por confiar en Subaston!</p>
+                <p class="footer-legal">Este comprobante es válido como prueba de pago. Conserva este ticket.</p>
+            </div>
+        </div>
+
+        <!-- BOTONES DE ACCIÓN -->
+        <div class="acciones">
+            <button onclick="window.print()" class="btn-accion btn-imprimir">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1" />
+                    <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zm3 12H5V10h4zm1-8H5V3h4zM9 8H7v1H5V8H3V7h2V6h2v1h2zm3 4h-2v-2h2z" />
+                </svg>
+                Imprimir Ticket
+            </button>
+            <a asp-area="Comprador" asp-controller="Comprador" asp-action="Historial" class="btn-accion btn-historial">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z" />
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0" />
+                </svg>
+                Ver mis compras
+            </a>
+            <a asp-area="Comprador" asp-controller="Comprador" asp-action="Index" class="btn-accion btn-explorar">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5z" />
+                </svg>
+                Explorar más subastas
+            </a>
+        </div>
+
+    </div>
+
+    <script>
+        // CONFETTI
+        const colors = ['#00B8D9','#6C63FF','#FF6584','#FFBE0B','#06D6A0','#FF9F1C'];
+        const wrapper = document.getElementById('confettiWrapper');
+        for (let i = 0; i < 80; i++) {
+            const conf = document.createElement('div');
+            conf.className = 'confetti-piece';
+            conf.style.cssText = `
+                left:${Math.random()*100}%;
+                width:${Math.random()*10+5}px;
+                height:${Math.random()*10+5}px;
+                background:${colors[Math.floor(Math.random()*colors.length)]};
+                animation-delay:${Math.random()*3}s;
+                animation-duration:${Math.random()*2+2}s;
+                border-radius:${Math.random()>0.5?'50%':'2px'};
+                transform:rotate(${Math.random()*360}deg);
+            `;
+            wrapper.appendChild(conf);
+        }
+
+        // ENTRADA
+        setTimeout(() => {
+            document.getElementById('successHeader').classList.add('show');
+            setTimeout(() => {
+                document.getElementById('ticket').classList.add('show');
+            }, 400);
+        }, 100);
+    </script>
+</body>
+</html>

@@ -1,0 +1,366 @@
+
+@{
+    ViewData["Title"] = "Panel Admin";
+    var usuario = Context.Session.GetString("Usuario");
+    var rol = Context.Session.GetString("Rol");
+    var apodo = Context.Session.GetString("Apodo");
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/Admin/Index.css" rel="stylesheet" />
+<link href="~/css/Notificaciones.css" rel="stylesheet" />
+
+
+<div class="mi-navbar">
+    <img class="imagen-navbar" src="~/Imagenes3/LogoFinal2-transparente.png" />
+    <div class="nav-links">
+        <span class="nombre-usuario">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+            </svg>
+            Bienvenido @apodo
+        </span>
+        <div class="notificaciones-wrapper">
+            <button id="btnNotificaciones" class="btn-notificaciones" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
+                </svg>
+                <span id="puntoNotificacion" class="punto-notificacion" style="display:none;"></span>
+            </button>
+
+            <div id="panelNotificaciones" class="panel-notificaciones" style="display:none;">
+                <div class="panel-notificaciones-header">
+                    <strong>Notificaciones</strong>
+                </div>
+
+                <div id="listaNotificaciones" class="lista-notificaciones"></div>
+            </div>
+        </div>
+        <a id="btn-logout" asp-area="Cuentas" asp-controller="Cuenta" asp-action="Logout">
+            Cerrar Sesión
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+            </svg>
+        </a>
+    </div>
+</div>
+
+<div class="contenedor-principal">
+
+    <div class="lado-izquierdo">
+
+        <div class="usuario">
+            <div class="icono">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                </svg>
+            </div>
+            <div class="datos">
+                <h1>@rol</h1>
+                <p>@usuario</p>
+            </div>
+        </div>
+
+        <div class="contenedor-internoizquierda">
+            <div class="titulo-izq"><h1>Accesos Rápidos</h1></div>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="Index" class="btn-lateral activo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                </svg>
+                Inicio
+            </a>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="ProductosPendientes" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003zM10.404 2 4.25 4.461 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339L8 5.961 5.596 5l6.154-2.461z" />
+                </svg>
+                Productos por aprobar
+                <span id="badge-pendientes" style="background:#00B8D9;color:#17082e;font-size:10px;font-weight:700;border-radius:10px;padding:1px 6px;display:none;">0</span>
+            </a>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="ReportesSubastas" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-receipt-cutoff" viewBox="0 0 16 16">
+                    <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5M11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1z" />
+                    <path d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118z" />
+                </svg>
+                Reportes de Pujas
+            </a>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="Usuarios" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                    <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z" />
+                </svg>
+                Administrar Usuarios
+            </a>
+            <a asp-area="Admin" asp-controller="Admin" asp-action="Estadisticas" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line" viewBox="0 0 16 16">
+                    <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1zm1 12h2V2h-2zm-3 0V7H7v7zm-5 0v-3H2v3z" />
+                </svg>
+                Estadísticas
+            </a>
+            <a id="btn-verificacion-card" asp-area="Cuentas" asp-controller="Cuenta" asp-action="Verificacion" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                    <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                </svg>
+                Cambia tu contraseña
+            </a>
+        </div>
+
+    </div>
+
+    <div class="lado-derecho">
+
+        <div class="bienvenida">
+            <h1 class="titulo-bienvenida">Pasos a Seguir en Tus Funciones</h1>
+        </div>
+
+        <div class="contenedor-tabs">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#productos" role="tab">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#usuarios" role="tab">Usuarios</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#reportes" role="tab">Reportes</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#estadisticas" role="tab">Estadísticas</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#notificaciones" role="tab">Notificaciones</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#perfil" role="tab">Perfiles</a></li>
+            </ul>
+
+            <div class="tab-content">
+
+                <!-- TAB PRODUCTOS -->
+                <div class="tab-pane fade show active" id="productos" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Aprobación de Productos</h2>
+                        <p class="tab-descripcion">Como administrador, tienes el control total sobre los productos que se publican en Subaston. Cuando un vendedor sube un producto, este queda en estado <strong>Pendiente</strong> hasta que tú lo revises.</p>
+                        <div class="tab-pasos">
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FA1.jpg" alt="Revisar producto" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Revisa el producto</h4>
+                                    <p>Entra a "Productos por aprobar" y revisa el nombre, descripción, precio base e imágenes. Todos deben ser adecuados, sin contenido inapropiado, violento o ilegal.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Aprueba o rechaza</h4>
+                                    <p>Si el producto cumple con los estándares, apruébalo. Si no, recházalo para que el vendedor lo vea. Si el caso lo requiere, da ban al usuario.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FA2.jpg" alt="Aprobar o rechazar" />
+                                </div>
+                            </div>
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FA3.jpg" alt="Producto publicado" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>El producto se publica</h4>
+                                    <p>Al aprobarlo, el producto aparece automáticamente en la página principal de las subastas y los compradores pueden empezar a pujar.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <a asp-area="Admin" asp-controller="Admin" asp-action="ProductosPendientes" class="btn-accion">Ir a Productos</a>
+                    </div>
+                </div>
+
+                <!-- TAB USUARIOS -->
+                <div class="tab-pane fade" id="usuarios" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Control de Usuarios</h2>
+                        <p class="tab-descripcion">Como Administrador tienes el control sobre todos los usuarios registrados en Subaston, tanto compradores como vendedores. Tienes acceso a su información y puedes tomar acciones sobre sus cuentas.</p>
+                        <div class="tab-pasos">
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FA4.jpg" alt="Ver usuarios" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Ver información</h4>
+                                    <p>Busca en la tabla de usuarios por paginación o directamente en la barra de búsqueda. Puedes ver el perfil completo de cada usuario.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Gestionar cuentas</h4>
+                                    <p>Si un usuario tiene comportamiento inadecuado o viola las reglas, puedes aplicar un Ban a su cuenta para proteger a la comunidad.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FA5.jpg" alt="Gestionar cuentas" />
+                                </div>
+                            </div>
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FA6.jpg" alt="Comunidad segura" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Mantener la comunidad</h4>
+                                    <p>Un buen control de usuarios garantiza una experiencia segura y confiable para todos en Subaston.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <a asp-area="Admin" asp-controller="Admin" asp-action="Usuarios" class="btn-accion">Ir a Usuarios</a>
+                    </div>
+                </div>
+
+                <!-- TAB REPORTES -->
+                <div class="tab-pane fade" id="reportes" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Reportes de Pujas</h2>
+                        <p class="tab-descripcion">Como Administrador puedes consultar los reportes enviados por los usuarios sobre comportamientos inadecuados o productos sospechosos dentro de la plataforma.</p>
+                        <div class="tab-pasos">
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FA7.jpg" alt="Recibir reportes" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Recibe reportes</h4>
+                                    <p>Los compradores pueden reportar productos con información falsa o contenido inadecuado. Los reportes llegan aquí para tu revisión.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Evalúa cada caso</h4>
+                                    <p>Revisa el reporte, verifica la información y decide si se requiere tomar acción sobre el usuario o producto reportado.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FA8.jpg" alt="Evaluar reporte" />
+                                </div>
+                            </div>
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FA9.jpg" alt="Tomar acción" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Toma acción</h4>
+                                    <p>Puedes banear al usuario, rechazar el producto o desestimar el reporte si no procede. Tú tienes la última palabra.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <a asp-area="Admin" asp-controller="Admin" asp-action="ReportesSubastas" class="btn-accion">Ir a Reportes</a>
+                    </div>
+                </div>
+
+                <!-- TAB ESTADISTICAS -->
+                <div class="tab-pane fade" id="estadisticas" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Estadísticas</h2>
+                        <p class="tab-descripcion">Como Administrador puedes visualizar datos generales sobre el comportamiento y actividad de la plataforma Subaston en tiempo real.</p>
+                        <div class="tab-pasos">
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FA10.jpg" alt="Usuarios registrados" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Usuarios registrados</h4>
+                                    <p>Consulta cuántos compradores y vendedores están activos en la plataforma actualmente.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Productos publicados</h4>
+                                    <p>Ve cuántos productos están activos, pendientes o rechazados en la plataforma en este momento.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FA11.jpg" alt="Productos" />
+                                </div>
+                            </div>
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FA12.jpg" alt="Actividad general" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Actividad general</h4>
+                                    <p>Consulta cuánto dinero ha generado la plataforma y el comportamiento general de las subastas.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <a asp-area="Admin" asp-controller="Admin" asp-action="Estadisticas" class="btn-accion">Ir a Estadísticas</a>
+                    </div>
+                </div>
+
+                <!-- TAB NOTIFICACIONES -->
+                <div class="tab-pane fade" id="notificaciones" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Notificaciones Personalizadas</h2>
+                        <p class="tab-descripcion">Envía advertencias oficiales, avisos de sistema o mensajes importantes de manera directa a la cuenta de cualquier usuario.</p>
+                        <div class="tab-pasos">
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/F44.png" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Selecciona el destinatario</h4>
+                                    <p>Desde el panel de reportes o la ficha de usuario, puedes seleccionar enviar una notificación personalizada a un usuario específico.</p>
+                                </div>
+                            </div>
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Redacta el mensaje y tipo</h4>
+                                    <p>Define un título claro, el mensaje de advertencia y la URL de destino opcional (por ejemplo, a sus productos rechazados o políticas).</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/F45.png"/>
+                                </div>
+                            </div>
+                        </div>
+                        <a asp-area="Admin" asp-controller="Admin" asp-action="ReportesSubastas" class="btn-accion">Ir a Reportes</a>
+                    </div>
+                </div>
+
+                <!-- TAB PERFIL -->
+                <div class="tab-pane fade" id="perfil" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Administración de Perfiles</h2>
+                        <p class="tab-descripcion">Revisa la actividad, historial de subastas y pujas detalladas de cualquier usuario para diagnosticar comportamientos inusuales.</p>
+                        <div class="tab-pasos">
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/F46.png"/>
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Visualiza el Perfil Completo</h4>
+                                    <p>Accede a la ficha detallada desde el listado de usuarios para ver la foto de perfil, reputación de ventas, productos creados y pujas hechas por el usuario.</p>
+                                </div>
+                            </div>
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Toma medidas correctivas</h4>
+                                    <p>Si encuentras que un usuario tiene múltiples quejas o comportamiento sospechoso, puedes aplicar baneos o advertencias directamente desde su perfil.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/F47.png" />
+                                </div>
+                            </div>
+                        </div>
+                        <a asp-area="Admin" asp-controller="Admin" asp-action="Usuarios" class="btn-accion">Ir a Usuarios</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/js/Vendedor/CerrarSesion.js"></script>
+<script src="~/js/Vendedor/MiPerfil.js"></script>
+<script src="~/js/Notificacion.js"></script>
+

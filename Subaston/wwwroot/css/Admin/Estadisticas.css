@@ -1,0 +1,422 @@
+/* FONDO GLOBAL CON SCROLL V */
+html, body {
+    min-height: 100vh;
+    background-image: linear-gradient(#17082e 0, #1a0933 7%, #1a0933 80%, #0c1f4c 100%);
+    color: white;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+/* NAVBAR */
+.mi-navbar {
+    background: rgba(23, 2, 41, 0.9);
+    padding: 8px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.imagen-navbar {
+    height: 2rem;
+    width: 6rem;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+    .nav-links a {
+        color: #d1d5db;
+        margin-left: 15px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+.nombre-usuario {
+    color: #00B8D9;
+    font-size: 14px;
+    margin-left: 15px;
+}
+
+/* LAYOUT */
+.contenedor-principal {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: calc(100vh - 48px);
+    overflow: hidden;
+}
+
+/* LADO IZQUIERDO */
+.lado-izquierdo {
+    margin-top: 2rem;
+    width: 20%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.usuario {
+    padding: 1rem;
+    margin-left: 1rem;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: rgba(23, 2, 41, 0.9);
+    justify-content: flex-start;
+    border-radius: 30px;
+    transition: all 0.2s;
+}
+
+.icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.datos {
+    margin: 0 0 0 0.5rem;
+}
+
+    .datos h1 {
+        font-size: 13px;
+        margin: 0 0 2px;
+    }
+
+    .datos p {
+        font-size: 11px;
+        margin: 0;
+        color: rgba(255,255,255,0.5);
+    }
+
+.usuario:hover {
+    color: #00B8D9;
+}
+
+.contenedor-internoizquierda {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    width: 96%;
+    background: rgba(23, 2, 41, 0.9);
+    border-radius: 30px;
+    align-self: flex-start;
+    padding-bottom: 1rem;
+}
+
+.titulo-izq {
+    padding: 1rem 1rem 0.5rem;
+}
+
+    .titulo-izq h1 {
+        font-size: 13px;
+        text-align: center;
+        color: rgba(255,255,255,0.4);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0;
+    }
+
+.btn-lateral {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    color: #d1d5db;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+    .btn-lateral:hover {
+        color: #00B8D9;
+        border: 1px solid rgba(0,184,217,0.3);
+    }
+
+    .btn-lateral.activo {
+        color: #00B8D9;
+        border: 1px solid rgba(0,184,217,0.3);
+        background: rgba(0,184,217,0.05);
+    }
+
+/* LADO DERECHO */
+.lado-derecho {
+    width: 80%;
+    flex-shrink: 0;
+    height: calc(100vh - 48px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-bottom: 4rem;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: #222222 #0f0f0f;
+}
+
+    .lado-derecho::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .lado-derecho::-webkit-scrollbar-track {
+        background: #0f0f0f;
+    }
+
+    .lado-derecho::-webkit-scrollbar-thumb {
+        background: #222222;
+        border-radius: 3px;
+    }
+
+/* BIENVENIDA */
+.bienvenida {
+    padding: 36px 40px 0;
+}
+
+.titulo-bienvenida {
+    color: white;
+    font-size: 2rem;
+    font-weight: 800;
+    text-shadow: 0 0 8px #00B8D9;
+    margin: 0 0 6px;
+    line-height: 1;
+}
+
+.subtitulo-bienvenida {
+    color: rgba(255,255,255,0.5);
+    font-size: 1rem;
+    margin: 0 0 24px;
+}
+
+/* METRICAS ADMIN GRID */
+.grid-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 0 40px;
+    margin-bottom: 32px;
+}
+
+.tarjeta-admin {
+    background: rgba(17, 24, 39, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s;
+}
+
+    .tarjeta-admin:hover {
+        transform: translateY(-5px);
+    }
+
+    .tarjeta-admin.revenue {
+        border-left: 5px solid #00B8D9;
+    }
+
+        .tarjeta-admin.revenue:hover {
+            border-color: #00B8D9;
+            box-shadow: 0 8px 32px 0 rgba(0, 184, 217, 0.15);
+        }
+
+    .tarjeta-admin.sales {
+        border-left: 5px solid #8B5CF6;
+    }
+
+        .tarjeta-admin.sales:hover {
+            border-color: #8B5CF6;
+            box-shadow: 0 8px 32px 0 rgba(139, 92, 246, 0.15);
+        }
+
+    .tarjeta-admin.users {
+        border-left: 5px solid #3B82F6;
+    }
+
+        .tarjeta-admin.users:hover {
+            border-color: #3B82F6;
+            box-shadow: 0 8px 32px 0 rgba(59, 130, 246, 0.15);
+        }
+
+    .tarjeta-admin.paid {
+        border-left: 5px solid #10B981;
+    }
+
+        .tarjeta-admin.paid:hover {
+            border-color: #10B981;
+            box-shadow: 0 8px 32px 0 rgba(16, 185, 129, 0.15);
+        }
+
+.icono-tarjeta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.revenue .icono-tarjeta {
+    color: #00B8D9;
+    background: rgba(0, 184, 217, 0.1);
+}
+
+.sales .icono-tarjeta {
+    color: #8B5CF6;
+    background: rgba(139, 92, 246, 0.1);
+}
+
+.users .icono-tarjeta {
+    color: #3B82F6;
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.paid .icono-tarjeta {
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.info-tarjeta h3 {
+    margin: 0 0 4px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 600;
+}
+
+.info-tarjeta .monto {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+}
+
+.revenue .monto {
+    color: #00B8D9;
+    text-shadow: 0 0 10px rgba(0, 184, 217, 0.2);
+}
+
+.sales .monto {
+    color: #ffffff;
+}
+
+.users .monto {
+    color: #ffffff;
+}
+
+.paid .monto {
+    color: #ffffff;
+}
+
+/* CHARTS GRID */
+.grid-graficas {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding: 0 40px;
+}
+
+.contenedor-grafica {
+    background: rgba(17, 24, 39, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4);
+}
+
+    .contenedor-grafica.full-width {
+        grid-column: span 2;
+    }
+
+.grafica-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 12px;
+}
+
+    .grafica-header h2 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #00B8D9;
+    }
+
+.canvas-wrapper {
+    position: relative;
+    height: 280px;
+    width: 100%;
+}
+
+    .canvas-wrapper.flex-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 50px;
+        height: auto;
+        padding: 10px 0;
+    }
+
+/* LEYENDA ROLES */
+.leyenda-roles {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.item-leyenda {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.color-badge {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+    .color-badge.compradores {
+        background-color: #3B82F6;
+    }
+
+    .color-badge.vendedores {
+        background-color: #10B981;
+    }
+
+    .color-badge.admins {
+        background-color: #F59E0B;
+    }
+
+@media (max-width: 992px) {
+    .grid-graficas {
+        grid-template-columns: 1fr;
+    }
+
+    .contenedor-grafica.full-width {
+        grid-column: span 1;
+    }
+
+    .canvas-wrapper.flex-center {
+        flex-direction: column;
+        gap: 20px;
+    }
+}

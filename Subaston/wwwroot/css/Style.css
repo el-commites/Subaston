@@ -1,0 +1,437 @@
+﻿/* colores y fuente base*/
+html, body {
+    height: 100%;
+    margin: 0;
+    overflow-y: auto; /* permite scroll vertical */
+    font-family: Arial, sans-serif;
+    color: #402954;
+}
+
+/* Botones — usados en varias vistas*/
+.btn-login {
+    border-color: white !important;
+}
+
+/* Botón primario azul — hero, detalle */
+.btn-cyan {
+    background: #00d4ff;
+    color: #0d0d0d;
+    padding: 12px 36px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block; /* permite padding en elementos tipo link */
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s; /* animación suave al hover */
+    margin: 0 8px;
+}
+
+    .btn-cyan:hover {
+        background: #00b8d9;
+        transform: scale(1.05); /* agranda ligeramente al pasar el mouse */
+        color: #0d0d0d;
+    }
+
+/* Botón secundario transparente — hero, detalle */
+.btn-outline-cyan {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 12px 36px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: background 0.2s, transform 0.2s;
+    margin: 0 8px;
+}
+
+    .btn-outline-cyan:hover {
+        background: white;
+        color: #0d0d0d;
+        transform: scale(1.05);
+    }
+
+/*HERO-Menu/Index.cshtml */
+.hero {
+    position: relative; /* permite posicionar la imagen como fondo absoluto */
+    width: 100vw; /* 100% del ancho de la pantalla, ignora el container */
+    height: 450px;
+    overflow: hidden; /* recorta lo que sobresale */
+    display: flex; /* centra el contenido */
+    align-items: center; /* centra verticalmente */
+    justify-content: center; /* centra horizontalmente */
+    margin-left: calc(-50vw + 50%); /* compensa el container de Bootstrap para ir full width */
+    margin-bottom: 0;
+}
+
+    .hero img {
+        position: absolute; /* se pone detrás del contenido */
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* la imagen llena sin deformarse */
+        filter: brightness(0.35); /* oscurece la imagen para que el texto sea legible */
+    }
+
+.hero-content {
+    position: relative; /* se pone encima de la imagen */
+    z-index: 2; /* asegura que quede por encima de la imagen */
+    text-align: center;
+}
+.hero-Logo {
+    font-size: 20px;
+    font-weight: 220;
+    color: white;
+    letter-spacing: 6px; /* espacio entre letras para efecto de logo */
+    text-shadow: 0 0 30px #00d4ff, 0 0 80px #00d4ff55; /* brillo azul alrededor del texto */
+}
+.hero-Logo span {
+    color: #00d4ff;
+}
+
+.hero-titulo {
+    font-size: 80px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: 6px; /* espacio entre letras para efecto de logo */
+    text-shadow: 0 0 30px #00d4ff, 0 0 80px #00d4ff55; /* brillo azul alrededor del texto */
+}
+
+    .hero-titulo span {
+        color: #00d4ff;
+    }
+
+.hero-subtitulo {
+    font-size: 18px;
+    color: #ccc;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+/* ACORDEON — Menu/Index.cshtml*/
+.acordeon {
+    display: flex; /* acomoda los paneles en fila horizontal */
+    flex-direction: row;
+    width: calc(100vw - 60px); /* full width menos margen de los bordes */
+    height: 450px;
+    margin-left: calc(-50vw + 50% + 30px); /* centrado compensando el container */
+    margin-bottom: 40px;
+    margin-top: 16px;
+    gap: 8px; /* espacio entre paneles */
+    overflow: hidden;
+    border-radius: 16px;
+}
+
+.panel {
+    position: relative;
+    flex: 1; /* todos los paneles ocupan el mismo espacio por defecto */
+    overflow: hidden;
+    cursor: pointer;
+    transition: flex 0.6s cubic-bezier(0.4, 0, 0.2, 1); /* animación suave al expandirse */
+    min-width: 45px; /* ancho mínimo cuando está colapsado */
+}
+
+    .panel:hover,
+    .panel.activo {
+        flex: 5; /* al hover ocupa 5 veces más espacio que los demás */
+    }
+
+    .panel img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top; /* ancla la imagen desde arriba */
+        filter: brightness(0.45) grayscale(0.4); /* oscuro y desaturado por defecto */
+        transition: filter 0.4s ease;
+        display: block; /* evita espacio extra debajo de la imagen */
+    }
+
+    .panel:hover img,
+    .panel.activo img {
+        filter: brightness(0.8) grayscale(0); /* más brillante y con color al expandirse */
+    }
+
+.panel-info {
+    position: absolute; /* flota sobre la imagen */
+    bottom: 20px;
+    left: 16px;
+    opacity: 0; /* invisible por defecto */
+    transform: translateY(10px); /* ligeramente abajo por defecto */
+    transition: opacity 0.3s ease 0.25s, transform 0.3s ease 0.25s; /* aparece con retraso */
+    white-space: nowrap; /* evita que el texto se parta en varias líneas */
+}
+
+.panel:hover .panel-info,
+.panel.activo .panel-info {
+    opacity: 1; /* visible al hover */
+    transform: translateY(0); /* sube a su posición normal */
+}
+
+.panel-titulo {
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.9); /* sombra para legibilidad sobre imagen */
+}
+
+.panel-sub {
+    font-size: 11px;
+    color: #00d4ff;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase; /* texto en mayúsculas */
+    margin-top: 4px;
+}
+
+.panel-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: #00d4ff;
+    color: #0d0d0d;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+    .panel-btn:hover {
+        background: white;
+        color: #0d0d0d;
+    }
+
+/*TARJETAS— Menu/Index y Vender/Index*/
+.card-producto {
+    background: #1a1a2e;
+    border: 1px solid #00d4ff33; /* borde azul semitransparente */
+    border-radius: 12px;
+    overflow: hidden; /* recorta la imagen al hacer zoom */
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit; /* hereda el color del padre para no verse como link */
+    display: block; /* ocupa todo el ancho del col */
+}
+
+    .card-producto:hover {
+        transform: scale(1.04);
+        box-shadow: 0 0 20px #00d4ff55; /* brillo azul alrededor de la tarjeta */
+        color: inherit;
+        text-decoration: none;
+    }
+
+.img-wrapper {
+    overflow: hidden; /* recorta la imagen cuando hace zoom */
+    height: 200px;
+    background: #0d0d1a;
+    display: flex;
+    align-items: center; /* centra el emoji cuando no hay imagen */
+    justify-content: center;
+    font-size: 48px;
+    color: #333;
+}
+
+    .img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+.card-producto:hover .img-wrapper img {
+    transform: scale(1.10); /* zoom suave en la imagen al hover */
+}
+
+.card-body-custom {
+    padding: 14px 16px;
+}
+
+.card-nombre {
+    font-size: 16px;
+    font-weight: 600;
+    color: #00d4ff;
+    margin-bottom: 4px;
+}
+
+.card-categoria {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 8px;
+}
+
+.card-precio {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+
+.card-fecha {
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* DETALLE— Vender/Detalle.cshtml*/
+.detalle-container {
+    max-width: 900px; /* limita el ancho para no verse muy estirado en pantallas grandes */
+    margin: 40px auto; /* centra horizontalmente */
+    background: #1a1a2e;
+    border: 1px solid #00d4ff33;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.detalle-imagen {
+    width: 100%;
+    height: 400px;
+    object-fit: cover; /* recorta sin deformar */
+    display: block;
+}
+
+.detalle-sin-imagen {
+    width: 100%;
+    height: 400px;
+    background: #0d0d1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    color: #333;
+}
+
+.detalle-body {
+    padding: 30px;
+}
+
+.detalle-categoria {
+    font-size: 12px;
+    color: #00d4ff;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.detalle-nombre {
+    font-size: 36px;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 16px;
+}
+
+.detalle-precio {
+    font-size: 32px;
+    font-weight: 700;
+    color: #00d4ff;
+    margin-bottom: 20px;
+}
+
+.detalle-info {
+    display: flex; /* acomoda las tarjetas de info en fila */
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap; /* si no caben en una fila, bajan a la siguiente */
+}
+
+.detalle-info-item {
+    background: #0d0d1a;
+    border: 1px solid #00d4ff22;
+    border-radius: 8px;
+    padding: 12px 20px;
+    flex: 1; /* cada tarjeta ocupa el mismo espacio */
+    min-width: 150px; /* mínimo para que no se vean muy chicas */
+}
+
+.detalle-info-label {
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+}
+
+.detalle-info-value {
+    font-size: 15px;
+    color: #ccc;
+    font-weight: 600;
+}
+
+.detalle-descripcion {
+    color: #888;
+    font-size: 15px;
+    line-height: 1.7; /* espacio entre líneas para mejor legibilidad */
+    margin-bottom: 30px;
+    border-top: 1px solid #00d4ff22; /* línea divisoria sutil */
+    padding-top: 20px;
+}
+
+.detalle-acciones {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap; /* los botones bajan si no caben */
+}
+
+.btn-pujar {
+    background: #00d4ff;
+    color: #0d0d0d;
+    padding: 14px 36px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+}
+
+    .btn-pujar:hover {
+        background: #00b8d9;
+        transform: scale(1.03);
+        color: #0d0d0d;
+    }
+
+.btn-volver {
+    background: transparent;
+    color: #ccc;
+    padding: 14px 36px;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: 700;
+    text-decoration: none;
+    border: 1px solid #444;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+    .btn-volver:hover {
+        border-color: #00d4ff;
+        color: #00d4ff;
+    }
+
+/*BADGES DE ROLES — Admin/Index.cshtml */
+.badge-admin {
+    background: #cc2a2a; /* rojo para admin */
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px; /* forma de pastilla */
+    font-size: 11px;
+}
+
+.badge-mod {
+    background: #854F0B; /* café para moderador */
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+}
+
+.badge-user {
+    background: #0F6E56; /* verde para usuario */
+    color: white;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+}

@@ -1,0 +1,162 @@
+@model List<Subaston.ViewsModels.SucursalInfo>
+@{
+    ViewData["Title"] = "Sucursales";
+    var usuario = Context.Session.GetString("Usuario");
+    var rol = Context.Session.GetString("Rol");
+    var apodo = Context.Session.GetString("Apodo");
+    var fotoPerfil = Context.Session.GetString("FotoPerfil");
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/Vendedor/CrearProducto.css" rel="stylesheet" />
+<link href="~/css/Vendedor/RazonesBaneo.css" rel="stylesheet" />
+<link href="~/css/Notificaciones.css" rel="stylesheet" />
+
+<div class="mi-navbar">
+    <img class="imagen-navbar" src="~/Imagenes3/LogoFinal2-transparente.png" />
+    <div class="nav-links">
+        <span class="nombre-usuario">
+            @if (!string.IsNullOrEmpty(fotoPerfil))
+            {
+                <img src="@fotoPerfil" style="width:24px; height:24px; border-radius:50%; object-fit:cover; margin-right:6px;" />
+            }
+            Hola @apodo
+        </span>
+        <div class="notificaciones-wrapper">
+            <button id="btnNotificaciones" class="btn-notificaciones" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
+                </svg>
+                <span id="puntoNotificacion" class="punto-notificacion" style="display:none;"></span>
+            </button>
+            <div id="panelNotificaciones" class="panel-notificaciones" style="display:none;">
+                <div class="panel-notificaciones-header">
+                    <strong>Notificaciones</strong>
+                </div>
+                <div id="listaNotificaciones" class="lista-notificaciones"></div>
+            </div>
+        </div>
+        <a id="btn-logout" asp-area="Cuentas" asp-controller="Cuenta" asp-action="Logout">
+            Cerrar sesion
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+            </svg>
+        </a>
+    </div>
+</div>
+
+<div class="contenedor-principal">
+
+    <div class="lado-izquierdo">
+        <div class="usuario">
+            <div class="icono">
+                @if (!string.IsNullOrEmpty(fotoPerfil))
+                {
+                    <img src="@fotoPerfil" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid #00B8D9;" />
+                }
+                else
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                    </svg>
+                }
+            </div>
+            <div class="datos">
+                <h1>@rol</h1>
+                <p>@usuario</p>
+            </div>
+        </div>
+
+        <div class="contenedor-internoizquierda">
+            <div class="titulo-izq">
+                <h1>Accesos Rapidos</h1>
+            </div>
+            <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="Index" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                </svg>
+                Inicio
+            </a>
+            <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="MisProductos" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-seam-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003zM10.404 2 4.25 4.461 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339L8 5.961 5.596 5l6.154-2.461z" />
+                </svg>
+                Mis Productos
+            </a>
+            <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="CrearProducto" class="btn-lateral activo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3z" />
+                </svg>
+                Crear Producto
+            </a>
+            <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="HistorialGanancias" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-coin" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8m5-4a5 5 0 1 1-10 0 5 5 0 0 1 10 0" />
+                    <path d="M9.438 11.944c.047.596.518 1.06 1.363 1.116v.44h.375v-.443c.875-.061 1.386-.529 1.386-1.207 0-.618-.39-.936-1.09-1.1l-.296-.07v-1.2c.376.043.614.248.671.532h.658c-.047-.575-.54-1.024-1.329-1.073V9.5h-.375v.45c-.747.073-1.255.522-1.255 1.158 0 .562.378.92 1.007 1.066l.248.061v1.272c-.384-.058-.639-.27-.696-.563h-.668zm1.36-1.354c-.369-.085-.569-.26-.569-.522 0-.294.216-.514.572-.578v1.1zm.432.746c.449.104.655.272.655.569 0 .339-.257.571-.709.614v-1.195z" />
+                    <path d="M1 0a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h4.083q.088-.517.258-1H3a2 2 0 0 0-2-2V3a2 2 0 0 0 2-2h10a2 2 0 0 0 2 2v3.528c.38.34.717.728 1 1.154V1a1 1 0 0 0-1-1z" />
+                    <path d="M9.998 5.083 10 5a2 2 0 1 0-3.132 1.65 6 6 0 0 1 3.13-1.567" />
+                </svg>
+                Historial de Ganancias
+            </a>
+            <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="MiPerfil" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                </svg>
+                Mi Perfil
+            </a>
+            <a id="btn-verificacion" asp-area="Cuentas" asp-controller="Cuenta" asp-action="Verificacion" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                    <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                </svg>
+                Cambia tu contraseña
+            </a>
+        </div>
+    </div>
+
+    <div class="guia-categorias-contenido">
+
+        <div class="gc-header">
+            <a asp-area="Vendedor" asp-controller="Vendedor" asp-action="CrearProducto" class="gc-volver">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
+                </svg>
+                Volver a Crear Producto
+            </a>
+            <h1 class="gc-titulo">Sucursales de Subaston</h1>
+            <p class="gc-subtitulo">Aquí debes entregar tu producto una vez que tu publicación sea aprobada.</p>
+        </div>
+
+        <div class="gc-grid" style="grid-template-columns: 1fr;">
+            @foreach (var sucursal in Model ?? new List<Subaston.ViewsModels.SucursalInfo>())
+            {
+                <div class="gc-card">
+                    <div class="gc-card-header"><span class="gc-nombre">@sucursal.Nombre</span></div>
+                    <div class="gc-card-body">
+                        <p class="gc-desc" style="margin-bottom:8px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" viewBox="0 0 16 16" style="margin-right:4px; opacity:.6;">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                            </svg>
+                            @sucursal.Direccion, @sucursal.Ciudad
+                        </p>
+                        <ul class="gc-lista">
+                            <li><strong>Teléfono:</strong> @sucursal.Telefono</li>
+                            <li><strong>Horario:</strong> @sucursal.Horario</li>
+                        </ul>
+                        <a href="@sucursal.MapUrl" target="_blank" rel="noopener" class="btn btn-sm" style="background:#00B8D9; color:#001; border:none; border-radius:8px; padding:6px 14px; display:inline-block; margin-top:8px; text-decoration:none; font-weight:600;">
+                            Ver en el mapa
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/js/Vendedor/CerrarSesion.js"></script>
+<script src="~/js/Notificacion.js"></script>
+

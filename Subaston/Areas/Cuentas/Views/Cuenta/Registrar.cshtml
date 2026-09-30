@@ -1,0 +1,85 @@
+@model Subaston.ViewsModels.RegistrarViewsModels
+@{
+    ViewData["Title"] = "Registro";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/cuenta-css/Registrar.css" />
+</head>
+<body>
+
+    <div class="mi-navbar">
+        <img class="imagen-navbar" src="~/Imagenes3/LogoFinal2-transparente.png" />
+        <div class="nav-links">
+            <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Login">Inicio de Sesión</a>
+            <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Verificacion">Cambio de Contraseña</a>
+            <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="PoliticasPrivacidad">Políticas de Privacidad</a>
+            <a asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+        </div>
+
+    </div>
+
+    <div class="layout">
+
+        <div class="lado-izquierdo">
+            <h1 class="texto-titulo">Empieza a Coleccionar Hoy</h1>
+            <p class="slogan">Únete a la comunidad de Subaston.</p>
+            <p class="desc">Crea tu cuenta y accede a subastas de figuras, cartas, consolas, arte y mucho más. La pieza que buscas te está esperando.<strong style="color:white">Lee nuestra <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="PoliticasPrivacidad" style="color:white; text-decoration: underline;">política de privacidad</a></strong></p>
+        </div>
+
+        <div class="register-container">
+
+            <h2>Crear Cuenta</h2>
+
+            <form asp-action="Registrar" method="post">
+
+                <label>Nombre</label>
+                <input asp-for="Nombre" placeholder="Ingresa tu nombre" />
+                <span asp-validation-for="Nombre" class="validation"></span>
+                <label>Apodo</label>
+                <input asp-for="Apodo" placeholder="Ingresa tu apodo" />
+                <span asp-validation-for="Apodo" class="validation"></span>
+                <label>Correo</label>
+                <input asp-for="Correo" placeholder="Ingresa tu correo" />
+                <span asp-validation-for="Correo" class="validation"></span>
+                <label>Contraseña</label>
+                <input asp-for="Contraseña" type="password" placeholder="Ingresa tu contraseña" />
+                <span asp-validation-for="Contraseña" class="validation"></span>
+                <label>Confirmar contraseña</label>
+                <input asp-for="ConfirmarContraseña" type="password" placeholder="Confirma tu contraseña" />
+                <span asp-validation-for="ConfirmarContraseña" class="validation"></span>
+                <label>Rol</label>
+
+                <select name="rol">
+                    <option value="Comprador">Comprador</option>
+                    <option value="Vendedor">Vendedor</option>
+                </select>
+
+                @if (ViewData.ModelState.ErrorCount > 0)
+                {
+                    <div style="background:#3a0a0a; border:1px solid #ff4d4d; border-radius:8px; padding:10px 14px; color:#ff6b6b; font-size:14px; margin-bottom:12px;">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <div>❌ @error.ErrorMessage</div>
+                        }
+                    </div>
+                }
+                <button type="submit" class="btn-verificar">Registrarse</button>
+
+                <div style="display: flex; gap: 12px; margin-top: 14px; justify-content: center;">
+                    <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Login" class="btn-principal">Inicio de Sesión</a>
+                    <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Verificacion" class="btn-secundario">¿Olvidaste tu contraseña?</a>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+</body>
+</html>

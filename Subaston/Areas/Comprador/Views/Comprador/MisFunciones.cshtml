@@ -1,0 +1,460 @@
+@{
+    ViewData["Title"] = "Mis Funciones";
+    var usuario = Context.Session.GetString("Usuario");
+    var rol = Context.Session.GetString("Rol") ?? "Comprador";
+    var apodo = Context.Session.GetString("Apodo");
+    var fotoPerfil = Context.Session.GetString("FotoPerfil");
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/Comprador/MisFunciones.css" />
+<link rel="stylesheet" href="~/css/Notificaciones.css" />
+
+<div class="mi-navbar">
+    <img class="imagen-navbar" src="~/Imagenes3/LogoFinal2-transparente.png" />
+    <div class="nav-links">
+        <span class="nombre-usuario">
+            @if (!string.IsNullOrEmpty(fotoPerfil))
+            {
+                <img src="@fotoPerfil" style="width:24px; height:24px; border-radius:50%; object-fit:cover; margin-right:6px;" />
+            }
+            Hola @apodo
+        </span>
+        <div class="notificaciones-wrapper">
+            <button id="btnNotificaciones" class="btn-notificaciones" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                    <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6" />
+                </svg>
+                <span id="puntoNotificacion" class="punto-notificacion" style="display:none;"></span>
+            </button>
+
+            <div id="panelNotificaciones" class="panel-notificaciones" style="display:none;">
+                <div class="panel-notificaciones-header">
+                    <strong>Notificaciones</strong>
+                </div>
+
+                <div id="listaNotificaciones" class="lista-notificaciones"></div>
+            </div>
+        </div>
+        <a id="btn-logout" asp-area="Cuentas" asp-controller="Cuenta" asp-action="Logout">
+            Cerrar sesion
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+            </svg>
+        </a>
+    </div>
+</div>
+
+<div class="contenedor-principal">
+
+    <!-- LADO IZQUIERDO -->
+    <div class="lado-izquierdo">
+
+        <div class="usuario">
+            <div class="icono">
+                @if (!string.IsNullOrEmpty(fotoPerfil))
+                {
+                    <img src="@fotoPerfil" style="width:40px; height:40px; border-radius:50%; object-fit:cover; border:2px solid #00B8D9;" />
+                }
+                else
+                {
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                        <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
+                        <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
+                    </svg>
+                }
+            </div>
+            <div class="datos">
+                <h1>@rol</h1>
+                <p>@usuario</p>
+            </div>
+        </div>
+
+        <div class="contenedor-internoizquierda">
+            <div class="titulo-izq"><h1>Accesos Rapidos</h1></div>
+            <a asp-area="Comprador" asp-controller="Comprador" asp-action="Index" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                    <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                </svg>
+                Subastas
+            </a>
+            <a asp-area="Comprador" asp-controller="Comprador" asp-action="Historial" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                    <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0" />
+                </svg>
+                Mi Historial de Compras
+            </a>
+            <a asp-area="Comprador" asp-controller="Comprador" asp-action="MiPerfil" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                    <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                </svg>
+                Mi Perfil
+            </a>
+            <a asp-area="Comprador" asp-controller="Comprador" asp-action="MisFunciones" class="btn-lateral activo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-index-thumb-fill" viewBox="0 0 16 16">
+                    <path d="M8.5 1.75v2.716l.047-.002c.312-.012.742-.016 1.051.046.28.056.543.18.738.288.273.152.456.385.56.642l.132-.012c.312-.024.794-.038 1.158.108.37.148.689.487.88.716q.113.137.195.248h.582a2 2 0 0 1 1.99 2.199l-.272 2.715a3.5 3.5 0 0 1-.444 1.389l-1.395 2.441A1.5 1.5 0 0 1 12.42 16H6.118a1.5 1.5 0 0 1-1.342-.83l-1.215-2.43L1.07 8.589a1.517 1.517 0 0 1 2.373-1.852L5 8.293V1.75a1.75 1.75 0 0 1 3.5 0" />
+                </svg>
+                Mis Funciones
+            </a>
+            <a id="btn-verificacion-card" asp-area="Cuentas" asp-controller="Cuenta" asp-action="Verificacion" class="btn-lateral">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill" viewBox="0 0 16 16">
+                    <path d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2M2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+                </svg>
+                Cambia tu contraseña
+            </a>
+        </div>
+
+    </div>
+
+    <!-- LADO DERECHO -->
+    <div class="lado-derecho">
+
+        <div class="bienvenida">
+            <h1 class="titulo-bienvenida">Guia del Comprador</h1>
+        </div>
+
+        <div class="contenedor-tabs">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><a class="nav-link active" data-bs-toggle="tab" href="#subastas" role="tab">Subastas</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#pujas" role="tab">Como Pujar</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#historial" role="tab">Historial</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#perfil" role="tab">Mi Perfil</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#pago" role="tab">Pago y Entrega</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#baneos" role="tab">Baneos</a></li>
+                <li class="nav-item"><a class="nav-link" data-bs-toggle="tab" href="#reportar" role="tab">Reportar</a></li>
+            </ul>
+
+            <div class="tab-content">
+
+                <!-- TAB SUBASTAS -->
+                <div class="tab-pane fade show active" id="subastas" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Explora las Subastas</h2>
+                        <p class="tab-descripcion">En Subaston encontraras productos unicos de segunda mano divididos por categorias. Figuras, juegos, cartas, consolas, arte, tecnologia y mas esperan por ti.</p>
+                        <div class="tab-pasos">
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC1.jpeg" alt="Explorar categorias" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Explora por categorias</h4>
+                                    <p>En la pagina principal encontraras los productos organizados por categoria: Figuras, Juegos, Cartas, Consolas, Arte, Tecnologia, Ropa y Musica. Navega libremente hasta encontrar algo que te interese.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Revisa los detalles del producto</h4>
+                                    <p>Cada producto tiene su pagina de detalle con descripcion completa, precio actual, total de pujas y el tiempo restante antes de que cierre la subasta. Tambien puedes ver quien va ganando.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC2.jpeg" alt="Detalles del producto" />
+                                </div>
+                            </div>
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC3.jpeg" alt="Tiempo restante" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Ojo con el tiempo</h4>
+                                    <p>Cada subasta tiene una fecha de cierre. El contador en tiempo real te muestra exactamente cuanto queda. Cuando llegue a cero, la subasta finaliza automaticamente y el comprador con la puja mas alta gana.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Reporta lo que no este bien</h4>
+                                    <p>Si encuentras un producto sospechoso, con informacion falsa o contenido inadecuado, puedes reportarlo directamente desde la pagina de subastas. Un administrador lo revisara, pero cuidado con mandar reportes falsos ya que está puede ser una razón para recibir un baneo. Si quieres saber por que más te pueden dar ban revisa el <a asp-area="Comprador" asp-controller="Comprador" asp-action="RazonesBan" class="card-link">enlace</a>.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC4.jpeg" alt="Reportar subasta" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <a asp-area="Comprador" asp-controller="Comprador" asp-action="Index" class="btn-accion">Ir a Subastas</a>
+                    </div>
+                </div>
+
+                <!-- TAB PUJAS -->
+                <div class="tab-pane fade" id="pujas" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Como Realizar una Puja</h2>
+                        <p class="tab-descripcion">Pujar es sencillo, pero hay reglas importantes que debes conocer. El sistema tiene validaciones automaticas para protegerte antes de confirmar.</p>
+                        <div class="tab-pasos">
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC5.jpeg" alt="Ingresa tu puja" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Ingresa una cantidad mayor</h4>
+                                    <p>Tu puja debe ser mayor a la puja actual del producto. Si intentas ingresar una cantidad igual o menor, el sistema te mostrara una alerta de <strong style="color:#f87171;">Puja no valida</strong> antes de enviar nada.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Confirma antes de enviar</h4>
+                                    <p>Antes de registrar tu puja, aparecera una ventana de confirmacion. Una vez que confirmes y se envie, no podras revertirla.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC6.jpeg" alt="Confirmar puja" />
+                                </div>
+                            </div>
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC7.jpeg" alt="Puja enviada" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Notificacion de puja enviada</h4>
+                                    <p>Al confirmar, veras una notificación en la esquina superior derecha con el mensaje <strong style="color:#4ade80;">Puja enviada</strong> antes de que la pagina se actualice con tu nueva puja registrada.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Verifica si vas ganando</h4>
+                                    <p>En la pagina de detalle puedes ver si tu puja es la mas alta. Si alguien te supera aparecera quien va ganando, para que decidas si quieres volver a pujar antes del cierre.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC8.jpeg" alt="Vas ganando" />
+                                </div>
+                            </div>
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC9.jpeg" alt="Restriccion puja propia" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>No puedes pujar en tus propios productos</h4>
+                                    <p>Si tambien eres vendedor, el sistema bloqueara automaticamente cualquier intento de pujar en productos que tu mismo hayas publicado.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <a asp-area="Comprador" asp-controller="Comprador" asp-action="Index" class="btn-accion">Ir a Pujar</a>
+                    </div>
+                </div>
+
+                <!-- TAB HISTORIAL -->
+                <div class="tab-pane fade" id="historial" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Tu Historial de Pujas</h2>
+                        <p class="tab-descripcion">En tu historial puedes ver todas las subastas en las que has participado, su estado actual y si ganaste o no cada una.</p>
+                        <div class="tab-pasos">
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC10.jpeg" alt="Ver historial" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Consulta tus pujas</h4>
+                                    <p>Entra a <strong style="color:white;">Mi Historial de Compras</strong> para ver todos los productos en los que has pujado. Se muestra el monto de tu mejor puja en cada subasta.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Identifica el estado</h4>
+                                    <p>Cada tarjeta muestra claramente el estado: <strong style="color:#fbbf24;">Subasta en curso</strong>, <strong style="color:#4ade80;">Ganaste</strong> o <strong style="color:#f87171;">No ganaste esta subasta</strong>. Sabes exactamente donde quedaste en cada una.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC11.jpeg" alt="Estado subasta" />
+                                </div>
+                            </div>
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC12.jpeg" alt="Ver producto" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Regresa al producto</h4>
+                                    <p>Desde el historial puedes entrar directamente al detalle de cada producto con el boton <strong style="color:white;">Ver Producto</strong> para ver su estado actual o volver a pujar si sigue activa.</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <a asp-area="Comprador" asp-controller="Comprador" asp-action="Historial" class="btn-accion">Ver mi historial</a>
+                    </div>
+                </div>
+
+                <!-- TAB MI PERFIL -->
+                <div class="tab-pane fade" id="perfil" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Gestiona tu Perfil</h2>
+                        <p class="tab-descripcion">En Mi Perfil puedes actualizar tu informacion personal, cambiar tu foto y modificar tu contrasena. Manten tu cuenta al dia para una mejor experiencia.</p>
+                        <div class="tab-pasos">
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC13.jpeg" alt="Cambiar foto" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Cambia tu foto de perfil</h4>
+                                    <p>Haz clic en <strong style="color:white;">Cambiar foto</strong> para subir una imagen desde tu dispositivo. Se aceptan formatos JPG, PNG y GIF con un tamano maximo de 2 MB. La foto se actualiza al instante.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Actualiza tu nombre y apodo</h4>
+                                    <p>Puedes modificar tu nombre completo y tu apodo en cualquier momento desde la seccion <strong style="color:white;">Mis datos</strong>. Si intentas guardar sin cambios, el sistema te avisara con una alerta informativa.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC14.jpeg" alt="Actualizar datos" />
+                                </div>
+                            </div>
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC15.jpeg" alt="Apodo unico" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>El apodo debe ser unico</h4>
+                                    <p>Si el apodo que eliges ya esta en uso por otro usuario, el sistema te mostrara un error. Elige uno diferente que te identifique en la plataforma.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Cambia tu contrasena</h4>
+                                    <p>Desde la seccion <strong style="color:white;">Seguridad</strong> puedes iniciar el proceso para cambiar tu contrasena. Seras redirigido al proceso de verificacion para confirmar tu identidad antes de cambiarla.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC16.jpeg" alt="Cambiar contrasena" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <a asp-area="Comprador" asp-controller="Comprador" asp-action="MiPerfil" class="btn-accion">Ir a Mi Perfil</a>
+                    </div>
+                </div>
+
+                <!-- TAB PAGO Y ENTREGA -->
+                <div class="tab-pane fade" id="pago" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Pago y Entrega</h2>
+                        <p class="tab-descripcion">Si ganaste una subasta, el siguiente paso es completar el pago para que puedas reclamar tu producto en sucursal.</p>
+                        <div class="tab-pasos">
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC17.jpeg" alt="Ganaste" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Ganaste la subasta</h4>
+                                    <p>Cuando la subasta finalice y tu puja sea la mas alta, veras el estado <strong style="color:#4ade80;">Ganaste esta subasta</strong> en tu historial junto con el monto a pagar.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Realiza el pago</h4>
+                                    <p>Desde tu historial encontraras el boton <strong style="color:white;">Pagar ahora</strong>. Al presionarlo, una ventana de confirmacion te avisara que seras redirigido a <strong style="color:white;">Mercado Pago</strong> para completar la transaccion.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC18.jpeg" alt="Pagar ahora" />
+                                </div>
+                            </div>
+
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC19.jpeg" alt="Recoger en sucursal" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Recoge en sucursal</h4>
+                                    <p>Una vez confirmado el pago, el producto estara listo para recogerse en la sucursal Subaston mas cercana. Solo presenta tu comprobante de pago al momento de recogerlo.</p>
+                                </div>
+                            </div>
+
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Estado: Pagado</h4>
+                                    <p>Al completar el pago, el estado del producto cambiara a <strong style="color:#4ade80;">Pagado</strong> y quedara registrado en tu historial para tu referencia.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/FPC20.jpeg" alt="Pago confirmado" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <a asp-area="Comprador" asp-controller="Comprador" asp-action="Historial" class="btn-accion">Ver mi historial</a>
+                    </div>
+                </div>
+
+                <!-- TAB BANEOS -->
+                <div class="tab-pane fade" id="baneos" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Razones de Baneo</h2>
+                        <p class="tab-descripcion">Mantenemos una comunidad limpia y segura. Conoce las reglas que como comprador debes seguir para evitar el baneo de tu cuenta.</p>
+                        <div class="tab-pasos">
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/F40.png"/>
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Pujas falsas o no pagadas</h4>
+                                    <p>Pujar en una subasta y negarte a pagar una vez finalizada daña el servicio y es motivo de baneo permanente.</p>
+                                </div>
+                            </div>
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Reportes falsos malintencionados</h4>
+                                    <p>Utilizar el botón de reporte para molestar a vendedores con información verídica o spammear falsedades será penalizado.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/F41.png" />
+                                </div>
+                            </div>
+                        </div>
+                        <a asp-area="Comprador" asp-controller="Comprador" asp-action="RazonesBan" class="btn-accion">Ver Razones de Baneo</a>
+                    </div>
+                </div>
+
+                <!-- TAB REPORTAR -->
+                <div class="tab-pane fade" id="reportar" role="tabpanel">
+                    <div class="tab-info">
+                        <h2 class="tab-titulo">Cómo Reportar Subastas</h2>
+                        <p class="tab-descripcion">Si detectas alguna irregularidad en una subasta activa, puedes reportarla a los administradores para que tomen cartas en el asunto.</p>
+                        <div class="tab-pasos">
+                            <div class="paso-card">
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/F42.png" />
+                                </div>
+                                <div class="paso-card-info">
+                                    <h4>Identifica la irregularidad</h4>
+                                    <p>Si la foto del producto parece falsa, de internet, el precio base está mal, la descripción es inapropiada o sospechas de fraude, reporta la subasta.</p>
+                                </div>
+                            </div>
+                            <div class="paso-card invertido">
+                                <div class="paso-card-info">
+                                    <h4>Usa el botón de Reportar</h4>
+                                    <p>Desde el detalle de la subasta, haz clic en "Reportar", elige el motivo de tu denuncia y añade un comentario detallado para que el administrador lo analice.</p>
+                                </div>
+                                <div class="paso-card-imagen">
+                                    <img src="~/imagenes4/F43.png" />
+                                </div>
+                            </div>
+                        </div>
+                        <a asp-area="Comprador" asp-controller="Comprador" asp-action="Index" class="btn-accion">Ver Subastas Activas</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="~/js/Vendedor/CerrarSesion.js"></script>
+<script src="~/js/Vendedor/MiPerfil.js"></script>
+<script src="~/js/Notificacion.js"></script>

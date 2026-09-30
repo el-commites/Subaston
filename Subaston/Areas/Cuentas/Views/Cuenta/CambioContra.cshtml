@@ -1,0 +1,62 @@
+@model Subaston.ViewsModels.CambioContraViewsModels
+@{
+    ViewData["Title"] = "Cambiar Contraseña";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/cuenta-css/CambioContraseña.css" />
+</head>
+<body>
+    <div class="mi-navbar">
+        <img class="imagen-navbar" src="~/Imagenes3/LogoFinal2-transparente.png" />
+        <div class="nav-links">
+        </div>
+    </div>
+
+    <div class="layout">
+
+        <div class="lado-izquierdo">
+            <h1 class="texto-titulo">Cambia tu Contraseña</h1>
+            <p class="slogan">Tu seguridad es lo primero.</p>
+            <p class="desc">Ingresa tu correo y establece una nueva contraseña para recuperar el acceso a tu cuenta en Subaston.</p>
+        </div>
+
+        <div class="login-container">
+            <h2>Nueva Contraseña</h2>
+            <form asp-action="CambioContra" method="post">
+
+                <div class="form-group">
+                    <label>Correo</label>
+                    <input asp-for="Correo" placeholder="Ingresa tu correo" />
+                    <span asp-validation-for="Correo" class="validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Nueva Contraseña</label>
+                    <input asp-for="NuevaContraseña" type="password" placeholder="Ingresa tu nueva contraseña" />
+                    <span asp-validation-for="NuevaContraseña" class="validation"></span>
+                </div>
+
+                <div class="form-group">
+                    <label>Confirmar Nueva Contraseña</label>
+                    <input asp-for="ConfirmarNuevaContraseña" type="password" placeholder="Repite tu nueva contraseña" />
+                    <span asp-validation-for="ConfirmarNuevaContraseña" class="validation"></span>
+                </div>
+
+                <button type="submit" class="btn-verificar">Actualizar Contraseña</button>
+
+                <div style="display: flex; gap: 12px; margin-top: 12px; justify-content: center;">
+                    <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Login" class="btn-secundario">Volver al Login</a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>

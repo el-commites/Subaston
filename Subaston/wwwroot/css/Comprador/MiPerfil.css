@@ -1,0 +1,503 @@
+/* FONDO GLOBAL */
+html, body {
+    min-height: 100vh;
+    background-image: linear-gradient(#17082e 0, #1a0933 7%, #1a0933 80%, #0c1f4c 100%);
+    color: white;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    scrollbar-color: #222222 #0f0f0f;
+}
+
+/* NAVBAR */
+.mi-navbar {
+    background: rgba(23, 2, 41, 0.9);
+    padding: 8px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+}
+
+.imagen-navbar {
+    height: 2rem;
+    width: 6rem;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
+    .nav-links a {
+        color: #d1d5db;
+        margin-left: 15px;
+        text-decoration: none;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+.nombre-usuario {
+    color: #00B8D9;
+    font-size: 14px;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* LAYOUT PRINCIPAL */
+.contenedor-principal {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 48px);
+    width: 100%;
+    overflow: hidden;
+}
+
+/* LADO IZQUIERDO (sidebar) */
+.lado-izquierdo {
+    margin-top: 2rem;
+    width: 20%;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+    .lado-izquierdo::-webkit-scrollbar {
+        width: 0;
+    }
+
+.usuario {
+    padding: 1rem;
+    margin-left: 1rem;
+    width: 90%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background: rgba(23, 2, 41, 0.9);
+    justify-content: flex-start;
+    border-radius: 30px;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: white;
+}
+
+.icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.datos {
+    margin: 0 0 0 0.5rem;
+}
+
+    .datos h1 {
+        font-size: 13px;
+        margin: 0 0 2px;
+    }
+
+    .datos p {
+        font-size: 11px;
+        margin: 0;
+        color: rgba(255,255,255,0.5);
+    }
+
+.usuario:hover {
+    color: #00B8D9;
+}
+
+.contenedor-internoizquierda {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    width: 90%;
+    background: rgba(23, 2, 41, 0.9);
+    border-radius: 30px;
+    align-self: flex-start;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
+}
+
+.titulo-izq {
+    padding: 1rem 1rem 0.5rem;
+}
+
+    .titulo-izq h1 {
+        font-size: 13px;
+        text-align: center;
+        color: rgba(255,255,255,0.4);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0;
+    }
+
+.btn-lateral {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    color: #d1d5db;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+    .btn-lateral:hover {
+        color: #00B8D9;
+        border: 1px solid rgba(0,184,217,0.3);
+    }
+
+    .btn-lateral.activo {
+        color: #00B8D9;
+        border: 1px solid rgba(0,184,217,0.3);
+        background: rgba(0,184,217,0.05);
+    }
+
+/* LADO DERECHO (contenedor del perfil) */
+.lado-derecho {
+    width: 80%;
+    flex-shrink: 0;
+    overflow-y: hidden;
+    padding: 1.5rem 2rem;
+}
+
+    .lado-derecho::-webkit-scrollbar {
+        width: 5px;
+    }
+
+    .lado-derecho::-webkit-scrollbar-track {
+        background: #0f0f0f;
+    }
+
+    .lado-derecho::-webkit-scrollbar-thumb {
+        background: #3a1a6e;
+        border-radius: 3px;
+    }
+
+    /* clearfix */
+    .lado-derecho::after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+/* COLUMNAS INTERNAS */
+.contenedor-interno-izq-der {
+    width: 31%;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-right: 2%;
+}
+
+.contenedor-interno-der-der {
+    width: 67%;
+    float: left;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* CARDS  (mismo tono que .card-form y .guia-card)*/
+.card-perfil {
+    background: #1e0a3c;
+    border: 1px solid #3a1a6e;
+    border-radius: 18px;
+    padding: 20px;
+}
+
+.bienvenida-card {
+    background: #1e0a3c;
+    border: 1px solid #3a1a6e;
+    border-radius: 18px;
+    padding: 14px 20px;
+}
+
+/* TITULO Y SUBTITULO */
+.titulo-bienvenida {
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 900;
+    text-shadow: 0 0 15px #00B8D9, 0 0 30px rgba(0,184,217,0.3);
+    text-align: center;
+    margin: 0 0 4px;
+    line-height: 1;
+    letter-spacing: -1px;
+    font-family: Arial, sans-serif;
+}
+
+.subtitulo-bienvenida {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.95rem;
+    margin: 0;
+    text-align: center;
+}
+
+/* FOTO DE PERFIL */
+.foto-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.7rem;
+    text-align: center;
+}
+
+.foto-circulo {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: #2d1058;
+    border: 2px solid #00B8D9;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .foto-circulo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+#input-foto {
+    display: none;
+}
+
+.btn-cambiar-foto {
+    background: rgba(23, 2, 41, 0.9);
+    border: 1px solid #00B8D9;
+    color: #00B8D9;
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+    .btn-cambiar-foto:hover {
+        background: rgba(0,184,217,0.1);
+    }
+
+/* INFO USUARIO */
+.sub-oscuro {
+    text-align: center;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.perfil-nombre {
+    color: white;
+    margin: 0;
+    font-size: 1.6rem;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-weight: 700;
+}
+
+.perfil-apodo {
+    color: #00B8D9;
+    font-size: 1.1rem;
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.perfil-correo {
+    color: rgba(255,255,255,0.45);
+    font-size: 0.85rem;
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.texto-foto-info {
+    color: #aaa;
+    font-size: 12px;
+    margin: 0;
+}
+
+.rol-badge {
+    display: inline-block;
+    padding: 3px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.badge-vendedor {
+    background: #00B8D9;
+    color: #17082e;
+}
+
+.badge-comprador {
+    background: #6f42c1;
+    color: white;
+}
+
+/* TITULO CYAN DE CARDS */
+.card-titulo-cyan {
+    color: #00B8D9;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 0 0 16px;
+    text-shadow: 0 0 15px #00B8D9, 0 0 30px rgba(0,184,217,0.3);
+}
+
+.card-subtitulo {
+    color: rgba(255,255,255,0.4);
+    font-size: 13px;
+    margin: 4px 0 14px;
+}
+
+/* CAMPOS DEL FORMULARIO  (igual que .campo) */
+.campo-dato {
+    background: #2d1058;
+    border-radius: 10px;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+}
+
+    .campo-dato label {
+        display: block;
+        color: #aaa;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 6px;
+    }
+
+    .campo-dato input {
+        width: 100%;
+        border: none;
+        background: rgba(23, 2, 41, 0.9);
+        color: white;
+        font-size: 14px;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+        outline: none;
+        border-radius: 6px;
+        padding: 6px 10px;
+    }
+
+        .campo-dato input:focus {
+            border-bottom: 1px solid #00d4f5;
+            outline: none;
+        }
+
+        .campo-dato input::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
+
+        .campo-dato input:disabled {
+            color: rgba(255,255,255,0.3);
+            cursor: not-allowed;
+        }
+
+    .campo-dato small {
+        font-size: 11px;
+        color: rgba(255,255,255,0.3);
+        margin-top: 3px;
+        display: block;
+    }
+
+/* BOTÓN GUARDAR */
+.btn-guardar {
+    display: inline-block;
+    padding: 10px 26px;
+    background: #00B8D9;
+    color: #000;
+    border: none;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: Arial, sans-serif;
+}
+
+    .btn-guardar:hover {
+        box-shadow: 0 0 12px #00B8D9;
+    }
+
+    .btn-guardar:active {
+        transform: scale(0.98);
+    }
+
+/* BOTÓN CAMBIAR CONTRASEÑA */
+.btn-cambiar-contrasena {
+    background: rgba(23, 2, 41, 0.9);
+    color: #00B8D9;
+    border: 1px solid #00B8D9;
+    border-radius: 10px;
+    padding: 9px 22px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.2s;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+    .btn-cambiar-contrasena:hover {
+        background: rgba(0,184,217,0.1);
+        color: #00B8D9;
+    }
+
+/* FUENTES TIPOGRAFICAS */
+
+/* Times New Roman — titulos y datos del perfil */
+.titulo-bienvenida {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.card-titulo-cyan {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.perfil-nombre {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.perfil-apodo {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.perfil-correo {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.btn-cambiar-contrasena {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Cursive — botones de accion */
+.btn-guardar {
+    font-family: cursive;
+}
+
+.btn-cambiar-foto {
+    font-family: cursive;
+}

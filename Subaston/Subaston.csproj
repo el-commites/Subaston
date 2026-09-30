@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\css\Vendedor\Sucursales.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="mercadopago-sdk" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="9.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.16" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.16" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+    <PackageReference Include="Supabase" Version="1.1.1" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Subaston.AccesoData\Subaston.AccesoData.csproj" />
+    <ProjectReference Include="..\Subaston.Models\Subaston.Models.csproj" />
+  </ItemGroup>
+
+</Project>

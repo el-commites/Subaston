@@ -1,0 +1,275 @@
+﻿@model List<Subaston.Models.Models.Productos>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = null;
+
+    var activas = Model != null
+        ? Model.Where(x => x.Estado == "Aceptado").ToList()
+        : new List<Subaston.Models.Models.Productos>();
+
+    var categorias = new List<(string Nombre, string Img, string Desc, string[] Filtros)>
+    {
+        ("FIGURAS", "~/imagenes2/figuras.jpg", "Las mejores figuras están en juego ahora mismo.", new[] { "Figuras" }),
+        ("VIDEOJUEGOS", "~/imagenes2/juegos.jpg", "Títulos que marcaron generaciones, ahora disponibles.", new[] { "Juegos", "Videojuegos" }),
+        ("CARTAS DE COLECCIÓN", "~/imagenes2/cartas.jpg", "Piezas visuales que cualquier fan quisiera tener.", new[] { "Cartas" }),
+        ("CONSOLAS", "~/imagenes2/controles.jpg", "Desde lo retro hasta lo más moderno en una sola subasta.", new[] { "Consolas" }),
+        ("ARTE", "~/imagenes2/arte.jpg", "Algunas piezas fueron hechas para robarse las miradas.", new[] { "Arte" }),
+        ("TECNOLOGÍA", "~/imagenes2/tecno.jpg", "Lo mejor de la tecnología puede aparecer en cualquier momento.", new[] { "Tecnologia", "Tecnología" }),
+        ("ROPA Y COSPLAY", "~/imagenes3/ropa.jpeg", "Viste algo diferente, auténtico y fuera de lo común.", new[] { "Ropa", "Cosplay", "RopaCosplay" }),
+        ("MÚSICA", "~/imagenes2/musica.jpg", "Vinilos y CDs que difícilmente volverás a ver.", new[] { "Musica", "Música" })
+    };
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <title>Subaston</title>
+</head>
+<body>
+
+    <div class="mi-navbar">
+        <img class="imagen-navbar" src="~/Imagenes3/LogoFinal2-transparente.png" />
+        <div class="nav-links">
+            <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Login">Inicio de Sesión</a>
+            <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Registrar">Registro</a>
+        </div>
+    </div>
+
+    <div class="contenedor-principal">
+
+        <div class="encabezado">
+            <img src="~/Imagenes3/LogoFinal2-transparente.png" style="width:20rem;" />
+            <p class="slogan">Tu próximo coleccionable te está esperando.</p>
+        </div>
+
+        <div class="carrusel">
+
+            <div id="carrusel"
+                 class="carousel slide h-100"
+                 data-bs-ride="carousel"
+                 data-bs-interval="4000">
+
+                <div class="carousel-inner h-100">
+
+                    <div class="carousel-item active altura-slide">
+                        <div class="contenido-slide">
+                            <div class="slide-informacion">
+                                <p class="tag">PRODUCTOS QUE PUEDES ENCONTRAR</p>
+                                <h4>Figuras de Colección</h4>
+                                <p>Piezas únicas que no encontrarás en ningún otro lugar. Desde figuras de anime hasta ediciones limitadas.</p>
+                            </div>
+                            <div class="slide-imagen">
+                                <img src="~/Imagenes3/figuras.jpeg" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item altura-slide">
+                        <div class="contenido-slide">
+                            <div class="slide-informacion">
+                                <p class="tag">PRODUCTOS QUE PUEDES ENCONTRAR</p>
+                                <h4>Videojuegos</h4>
+                                <p>Clásicos, retro y joyas raras que ya no se consiguen. Si lo quieres de verdad, tendrás que ganarlo.</p>
+                            </div>
+                            <div class="slide-imagen">
+                                <img src="~/Imagenes3/juegos.jpg" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item altura-slide">
+                        <div class="contenido-slide">
+                            <div class="slide-informacion">
+                                <p class="tag">PRODUCTOS QUE PUEDES ENCONTRAR</p>
+                                <h4>Cartas de Colección</h4>
+                                <p>Desde Pokémon hasta Magic: The Gathering. Cartas que pueden ser la joya de tu colección.</p>
+                            </div>
+                            <div class="slide-imagen">
+                                <img src="~/Imagenes3/cartas.jpeg" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item altura-slide">
+                        <div class="contenido-slide">
+                            <div class="slide-informacion">
+                                <p class="tag">PRODUCTOS QUE PUEDES ENCONTRAR</p>
+                                <h4>Consolas</h4>
+                                <p>Retro, clásicas o de colección. Consolas que marcaron generaciones y ahora están esperando un nuevo dueño.</p>
+                            </div>
+                            <div class="slide-imagen">
+                                <img src="~/Imagenes3/consolas.jpeg" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item altura-slide">
+                        <div class="contenido-slide">
+                            <div class="slide-informacion">
+                                <p class="tag">PRODUCTOS QUE PUEDES ENCONTRAR</p>
+                                <h4>Arte</h4>
+                                <p>Fanarts, pósters y obras originales de tus franquicias favoritas. Arte que vale la pena coleccionar.</p>
+                            </div>
+                            <div class="slide-imagen">
+                                <img src="~/Imagenes3/arte.jpeg" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item altura-slide">
+                        <div class="contenido-slide">
+                            <div class="slide-informacion">
+                                <p class="tag">PRODUCTOS QUE PUEDES ENCONTRAR</p>
+                                <h4>Tecnología</h4>
+                                <p>Gadgets, audífonos, teclados y más. Tecnología única que no siempre está disponible en cualquier tienda.</p>
+                            </div>
+                            <div class="slide-imagen">
+                                <img src="~/Imagenes3/gadget.jpeg" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item altura-slide">
+                        <div class="contenido-slide">
+                            <div class="slide-informacion">
+                                <p class="tag">PRODUCTOS QUE PUEDES ENCONTRAR</p>
+                                <h4>Ropa y Cosplay</h4>
+                                <p>Prendas inspiradas en tus personajes favoritos, ediciones limitadas y vestuario que no encontrarás en ninguna tienda.</p>
+                            </div>
+                            <div class="slide-imagen">
+                                <img src="~/Imagenes3/ropa.jpeg" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-item altura-slide">
+                        <div class="contenido-slide">
+                            <div class="slide-informacion">
+                                <p class="tag">PRODUCTOS QUE PUEDES ENCONTRAR</p>
+                                <h4>Música</h4>
+                                <p>Vinilos, discos y ediciones especiales de tus artistas favoritos. Piezas que todo amante de la música querría tener.</p>
+                            </div>
+                            <div class="slide-imagen">
+                                <img src="~/Imagenes3/cds.jpeg" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carrusel" data-bs-slide-to="0" class="active"></button>
+                        <button type="button" data-bs-target="#carrusel" data-bs-slide-to="1"></button>
+                        <button type="button" data-bs-target="#carrusel" data-bs-slide-to="2"></button>
+                        <button type="button" data-bs-target="#carrusel" data-bs-slide-to="3"></button>
+                        <button type="button" data-bs-target="#carrusel" data-bs-slide-to="4"></button>
+                        <button type="button" data-bs-target="#carrusel" data-bs-slide-to="5"></button>
+                        <button type="button" data-bs-target="#carrusel" data-bs-slide-to="6"></button>
+                        <button type="button" data-bs-target="#carrusel" data-bs-slide-to="7"></button>
+                    </div>
+
+                </div>
+            </div>
+
+            @foreach (var cat in categorias)
+            {
+                var productosCategoria = activas
+                .Where(x => x.Categoria != null && cat.Filtros.Contains(x.Categoria))
+                .ToList();
+
+                <div class="seccion-categoria">
+                    <div class="contenedor-descripcion">
+                        <div class="des-img">
+                            <img src="@Url.Content(cat.Img)" />
+                        </div>
+                        <div class="des-info">
+                            <p class="tag">@cat.Nombre</p>
+                            <p>@cat.Desc</p>
+                        </div>
+                    </div>
+
+                    <div class="contenedor-pujas">
+                        @if (productosCategoria.Count > 0)
+                        {
+                            foreach (var producto in productosCategoria)
+                            {
+                                <div class="card-producto">
+
+                                    <div class="capsula-producto">
+                                        <div class="img-producto">
+                                            @if (!string.IsNullOrEmpty(producto.ImagenUrl))
+                                            {
+                                                <img src="@producto.ImagenUrl" alt="producto" />
+                                            }
+                                            else
+                                            {
+                                                <img src="~/imagenes/no-image.png" alt="sin imagen" />
+                                            }
+                                        </div>
+
+                                        <div class="info-producto">
+                                            <div class="vendedor-card">
+                                                @if (!string.IsNullOrEmpty(producto.VendedorFoto))
+                                                {
+                                                    <img src="@producto.VendedorFoto" alt="vendedor" />
+                                                }
+                                                else
+                                                {
+                                                    <div class="icono-vendedor-default">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+                                                            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2 5a1 1 0 0 0 1-1v-1a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v1a1 1 0 0 0 1 1z" />
+                                                        </svg>
+                                                    </div>
+                                                }
+                                                <span>@(producto.VendedorApodo ?? "Vendedor")</span>
+                                            </div>
+
+                                            <h3>@producto.NombreDelProducto</h3>
+                                            <p class="descripcion-producto">@producto.Descripcion</p>
+                                            <div class="precio">$@producto.PujaActual</div>
+                                            <div class="categoria-producto">@producto.Categoria</div>
+                                            <div class="fecha-cierre">Finaliza: @producto.FechaCierre.ToString("dd/MM/yyyy")</div>
+                                            <div class="fecha-cierre">Pujas: @producto.TotalPujas</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="botones-card">
+                                        <a asp-area="Cuentas"
+                                           asp-controller="Cuenta"
+                                           asp-action="Login"
+                                           class="btn-pujar">
+                                            Ver y Pujar
+                                        </a>
+                                    </div>
+
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="sin-productos">No tenemos productos por el momento.</div>
+                        }
+                    </div>
+                </div>
+            }
+
+            <div class="final">
+                <img src="~/Imagenes3/LogoFinal2-transparente.png" style="width:20rem;" />
+                <h2 class="texto-titulo">Entre más gente, más productos puedes encontrar.</h2>
+                <br />
+                <p class="descripcion">Somos una plataforma en crecimiento y cada nuevo usuario trae más oportunidades. Si quieres empezar a comprar, únete ahora.</p>
+                <div class="botones">
+                    <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Registrar" class="btn-principal">Registrarse</a>
+                    <a asp-area="Cuentas" asp-controller="Cuenta" asp-action="Login" class="btn-secundario">Iniciar Sesión</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
